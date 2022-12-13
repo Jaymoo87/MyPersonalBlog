@@ -57,6 +57,23 @@ router.get("/db/blogs", async (req, res) => {
      }
    });
 
+   router.put('/db/blogs/:id', async (req, res) => {
+    let blogid = Number(req.params.id);
+  
+    const { authorid, content, title, id } = req.body;
+  
+    if (!authorid || !content || !title) return res.status(400).json({ message: "Need to know who you are and what you said and a damn title!" });
+  
+          try {
+            const BlogToEdit = { authorid, content, title }
+            await db.blogs.editBlog(BlogToEdit, blogid)
+            res.status(201).json({ message: "Blog has been updated, try to do it right the first time" });
+          } catch (e) {
+            console.log(e);
+            res.sendStatus(500);
+          }
+  })
+
 
 
 export default router;
