@@ -1,6 +1,7 @@
 import * as mysql from 'mysql';
 import config from "../config";
 
+
 import blogs from './blogs'
 
 const pool = mysql.createPool(config.mysql)

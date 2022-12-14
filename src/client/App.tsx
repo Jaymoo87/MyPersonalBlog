@@ -1,31 +1,47 @@
 import * as React from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { useState, useEffect } from 'react';
 
+
+
+
+import Navbar from "./components/Navbar";
+import Blogs from './components/Blogs';
+
 /* HOOK REACT EXAMPLE */
-const App = (props: AppProps) => {
-	const [greeting, setGreeting] = useState<string>('');
-
-	useEffect(() => {
-		async function getGreeting() {
-			try {
-				const res = await fetch('/api/hello');
-				const greeting = await res.json();
-				setGreeting(greeting);
-			} catch (error) {
-				console.log(error);
-			}
-		}
-		getGreeting();
-	}, []);
-
+const App = () => {
 	return (
-		<main className="container my-5">
-			<h1 className="text-primary text-center">Hello {greeting}!</h1>
+	  <BrowserRouter>
+		<Navbar />
+		<main className="container mt-5">
+		  <section className="row justify-content-center">
+			<Routes>
+			  <Route path="/db/blogs" element={<Blogs />}></Route>
+			  <Route path="" element></Route>
+			  <Route path="" element></Route>
+			  <Route
+				path=""
+				element={
+				  <h1>
+					<></>
+				  </h1>
+				}
+			  ></Route>
+			  <Route
+				path=""
+				element={
+				  <h1>
+					<></>
+				  </h1>
+				}
+			  ></Route>
+			  <Route path="*" element={<h1>404 Not Found</h1>}></Route>
+			</Routes>
+		  </section>
 		</main>
+	  </BrowserRouter>
 	);
-};
-
-interface AppProps {}
+  };
 
 /* CLASS REACT EXAMPLE */
 // class App extends React.Component<IAppProps, IAppState> {

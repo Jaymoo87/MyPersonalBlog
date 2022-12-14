@@ -1,4 +1,4 @@
-interface IBlog {
+export interface IBlog {
     id?: number;
     authorid: string;
     content: string;
@@ -7,4 +7,3 @@ interface IBlog {
 }
 
 
-export default IBlog;
