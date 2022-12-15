@@ -1,6 +1,6 @@
 import * as express from 'express';
-import db from './db'
-import blogs from './db/blogs'
+import db from './api'
+import blogs from './api/blogs'
 
 
 const router = express.Router();
@@ -9,7 +9,7 @@ router.get('/api/hello', (req, res, next) => {
     res.json('World');
 });
 
-router.get("/db/blogs", async (req, res) => {
+router.get("/api/blogs", async (req, res) => {
   
     try {
       res.json(await db.blogs.getAllBlogs());
@@ -19,7 +19,7 @@ router.get("/db/blogs", async (req, res) => {
     }
   });
 
-  router.get("/db/blogs/:id", async (req, res) => {
+  router.get("/api/blogs/:id", async (req, res) => {
     let id = Number(req.params.id);
     try {
      res.json((await db.blogs.getOneBlog(id))[0]);
@@ -29,7 +29,7 @@ router.get("/db/blogs", async (req, res) => {
     }
   });
 
-  router.delete("/db/blogs/:id", async (req, res) => {
+  router.delete("/api/blogs/:id", async (req, res) => {
     let id = Number(req.params.id);
     try {
       res.json((await db.blogs.deleteBlog(id))[0]);
@@ -58,7 +58,7 @@ router.get("/db/blogs", async (req, res) => {
      }
    });
 
-   router.put('/db/blogs/:id', async (req, res) => {
+   router.put('/api/blogs/:id', async (req, res) => {
     let blogid = Number(req.params.id);
   
     const { authorid, content, title, id } = req.body;

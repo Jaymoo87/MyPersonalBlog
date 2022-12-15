@@ -5,8 +5,10 @@ import { useState, useEffect } from 'react';
 
 
 
+
 import Navbar from "./components/Navbar";
 import Blogs from './components/Blogs';
+import BlogCard from './components/BlogCard';
 
 /* HOOK REACT EXAMPLE */
 const App = () => {
@@ -16,8 +18,8 @@ const App = () => {
 		<main className="container mt-5">
 		  <section className="row justify-content-center">
 			<Routes>
-			  <Route path="/db/blogs" element={<Blogs />}></Route>
-			  <Route path="" element></Route>
+			  <Route path="/blogs" element={<Blogs />}></Route>
+			  <Route path="/blogs/:blogid" element={<BlogCard />}></Route>
 			  <Route path="" element></Route>
 			  <Route
 				path=""

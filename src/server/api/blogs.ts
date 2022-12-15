@@ -1,4 +1,4 @@
-import IBlog from "../../types";
+import { IBlog } from "../../types";
 import { Query } from "./index"
 
 export const getAllBlogs = async () => Query<string[]>('SELECT * from blogs');
