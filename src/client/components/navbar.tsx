@@ -24,16 +24,7 @@ const Navbar = () => {
       >
         Blogs
       </NavLink>
-      <NavLink
-        to="/films"
-        className={({ isActive }) =>
-          `nav-link ${
-            isActive ? "active btn btn-dark text-light btn-outline-secondary" : "btn btn-dark text-light"
-          }`
-        }
-      >
-        Films
-      </NavLink>
+     
     </nav>
   );
 };

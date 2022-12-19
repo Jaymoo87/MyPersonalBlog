@@ -34,10 +34,10 @@ return (
 
         <p className=" m-5 card-text fw-bold ">{blog.content.substring(0, 100)}...</p>
         <div className="d-flex justify-content-between mx-2">
-          <Link to={`/blogs/${blog.id}`} className="btn btn-sm d-flex shadow btn-dark btn-outline-primary mb-4">Read Blog</Link>
           <h6 className=" text-info d-flex card-text fst-italic">
-            Author: {blog.authorid}
+           <span className="text-success fw-bolder"> Author - </span> {blog.authorid}
           </h6>
+          <Link to={`/blogs/${blog.id}`} className="btn btn-sm d-flex shadow btn-dark btn-outline-primary mb-4">Read Blog</Link>
         </div>
       </div>
     </div>
