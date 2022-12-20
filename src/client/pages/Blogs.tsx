@@ -9,9 +9,9 @@ import { IBlog } from "../../types";
 
 
 const Blogs = () => {
-    // const { blogid } = useParams()
+    
   const [blogs, setBlogs] = useState<IBlog[]>([]);
-  // const catswithballs = require('./catswithballs.png')
+  
   useEffect(() => {
     fetch("/api/blogs")
       .then((res) => res.json())

@@ -1,45 +1,61 @@
-import { response } from "express";
+
 import React, { useEffect, useState } from "react";
-import { json, Link, useNavigate  } from 'react-router-dom';
+import { json, Link, useNavigate, useParams  } from 'react-router-dom';
 
 
 import Swal from "sweetalert2";
-import  { createBrowserHistory } from "history"
-
-// const history = createBrowserHistory()
 
 
 
-const AddNewBlog = () => {
 
+const EditBlog = () => {
+    
     const MAX = 5000
-
-    const [author, setAuthor] = useState<string>('')
+    const { id } = useParams();
+    const [authorid, setAuthorid] = useState<string>('')
     const [title, setTitle] = useState<string>('')
     const [content, setContent] = useState<string>('')
 
-    const handleClick = (err: React.MouseEvent<HTMLButtonElement>) => {
-        err.preventDefault();
-        newBlog();
+    useEffect(() => {
+        fetch(`/api/blogs/${id}`)
+            .then(res => res.json())
+            .then(data => {
+                setTitle(data.title)
+                setContent(data.content)
+                setAuthorid(data.authorid)
+            })
+            .catch(console.error)
+    },[])
+
+    const [tags, setTags] = useState<string>('')
+    const [selectedTagId, setSelectedTagID] = useState<number>()
+
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        blogToEdit();
     }
     const nav = useNavigate();
     const backToBlogs = () => {
         nav('/blogs')
     }
-
-    const newBlog = async () => {
     
+   
+
+const blogToEdit = async () => {
         const blog = {
-            author,
+            
+            authorid,
             title,
             content
         }
 
-    let res = await fetch("/api/blogs", {
-        method: "POST",
+
+       
+
+    let res = await fetch(`/api/blogs/${id}`, {
+        method: "PUT",
         headers: {
-           
-            "content-type": "application/json"
+            "Content-Type": "application/json"
         },
         body: JSON.stringify(blog)
         
@@ -47,13 +63,19 @@ const AddNewBlog = () => {
     if(res.ok) {
         Swal.fire({
             title: 'Success!',
-            text: 'Your Blog Has Been Submitted',
-            confirmButtonText: 'Cool'
+            icon: 'success',
+            text: 'Your Blog Has Been Updated',
+            confirmButtonText: 'Do It Right The First Time!'
           });
           backToBlogs();
     } else {
      
-        alert('blog not posted! Fail.')
+        Swal.fire({
+            title: 'Fuck!',
+            icon: 'error',
+            text: 'blog not posted! Fail.',
+            confirmButtonText: 'not cool'
+          });
     }
 }
 
@@ -67,10 +89,10 @@ return (
             type="text"
             className="form-control" 
             placeholder="Your Name"
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
+            value={authorid}
+            onChange={(e) => setAuthorid(e.target.value)}
             ></input>
-            <label>Title</label>
+            <label>Edit Title</label>
             <input 
             type="text"
             className="form-control" 
@@ -88,23 +110,23 @@ return (
                 </select>
             </div>
             <div className="form-group">
-                <label>Submit Blog</label>
-                <textarea 
-                className="form-control" 
-                placeholder="Your Blog Entry Here"
+                <label>Edit Blog</label>
+                <div >
+                <textarea  style={{resize: 'none'}} rows={50} className=" col-12 rounded bg-blogbg  card-text " 
+                placeholder= "Blog Entry"
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
-                ></textarea>
+                ></textarea ></div>
                 <div className="d-flex justify-content-end">
                 <span className="mx-3">{content.length}/{MAX}</span>
                 <button
                 value="Submit Blog"
-                className=" my-3 btn btn-dark rounded " 
+                className=" my-3 btn btn-dark rounded btn-outline-primary " 
                 onClick={handleClick}
-                >Post</button></div>
+                >Submit Edit</button></div>
             </div>
         </div>
 );
 }
 
-export default AddNewBlog;
+export default EditBlog;

@@ -5,12 +5,12 @@ import { useState, useEffect } from 'react';
 
 
 
-
-import Navbar from "./components/Navbar";
-import Blogs from './components/Blogs';
-import BlogCard from './components/BlogCard';
-import Home from './components/Home';
-import AddNewBlog from './components/NewBlog';
+import Navbar from "./components/navbar";
+import BlogCard from './pages/BlogCard';
+import Blogs from './pages/Blogs';
+import Home from './pages/Home';
+import AddNewBlog from './pages/NewBlog';
+import EditBlog from './pages/EditBlog';
 
 /* HOOK REACT EXAMPLE */
 const App = () => {
@@ -24,6 +24,7 @@ const App = () => {
 			  <Route path="/blogs" element={<Blogs />}></Route>
 			  <Route path="/blogs/:id" element={<BlogCard />}></Route>
 			  <Route path="/blogs/new" element={<AddNewBlog />}></Route>
+			  <Route path="/blogs/:id/edit" element={<EditBlog />}></Route>
 				
 			  
 				

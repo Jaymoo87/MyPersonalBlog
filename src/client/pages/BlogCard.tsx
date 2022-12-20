@@ -18,23 +18,23 @@ const BlogCard = () => {
     }, [id]);
   
     return (
-      <div className="d-flex container justify-content-center bg-secondary border-dark shadow p-5">
-        <div key={`film-card-${blog?.id}`} className=" d-block col-12 col-md-6 col-sm-12 mt-4">
-          <div className="mb-2 card shadow-lg bg-primary border border-info">
+      <div className="d-flex container justify-content-center bg-secondary border-dark shadow p-2">
+        <div key={`film-card-${blog?.id}`} className=" d-flex justify-content-center col-12 col-sm-12 mt-4">
+          <div className="d-flex mb-2 col-12 card shadow-lg bg-primary border border-info">
             
   
             <h3 className="card-title text-center pt-3 mx-3 ">{blog?.title}</h3>
   
-            <h5 className=" m-5 card-text ">{blog?.content}</h5>
+            <textarea readOnly style={{resize: 'none'}} rows={20} className=" rounded bg-blogbg m-5 card-text ">{blog?.content}</textarea>
             <div className="d-flex justify-content-end mx-2">
               <h6 className="  d-flex card-text fst-italic">Author: {blog?.authorid}</h6>
               
             </div>
             <div className="badge d-flex justify-content-start">
-              <Link to="/blogs" className=" shadow-lg border-radius btn btn-sm btn-dark btn-outline-secondary">
+              <Link to="/blogs" className=" shadow-lg border-radius btn btn-sm btn-dark btn-outline-primary">
                 Go Back
               </Link>
-              <Link to={`/${blogid}/Edit`} className=" shadow-lg border-radius btn btn-sm btn-dark btn-outline-secondary">
+              <Link to={`/blogs/${id}/edit`} className=" shadow-lg border-radius btn btn-sm btn-dark btn-outline-primary">
                 Edit Blog
               </Link>
             </div>

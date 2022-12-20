@@ -41,7 +41,7 @@ router.get("/api/blogs", async (req, res) => {
 
 
 
-  router.post("/", async(req, res) => {
+  router.post("/api/blogs", async(req, res) => {
     try{  
     const { authorid, content, title } = req.body;
    

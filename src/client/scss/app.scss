@@ -7,6 +7,7 @@ $warning: #8FAD88;
 $danger: #d62518;
 $light: #f8f9fa;
 $dark: #4D7C8A;
+$blogbg: #b9d6e02d;
 
 // Then add them to your custom theme-colors map, together with any additional colors you might need
 $theme-colors: (
@@ -18,6 +19,7 @@ $theme-colors: (
 	danger: $danger,
 	light: $light,
 	dark: $dark,
+	blogbg: $blogbg 
 	// add any additional color below
 );
 
