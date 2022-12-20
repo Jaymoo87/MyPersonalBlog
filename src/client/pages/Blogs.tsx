@@ -32,7 +32,7 @@ return (
         <div className="row card-body"></div>
         <h3 className="card-title text-center mx-3">{blog.title}</h3>
 
-        <p className=" m-5 card-text fw-bold ">{blog.content.substring(0, 100)}...</p>
+        <p className=" m-5 card-text fw-bold ">{blog.content.substring(0, 250)}...</p>
         <div className="d-flex justify-content-between mx-2">
           <h6 className=" text-info d-flex card-text fst-italic">
            <span className="text-success fw-bolder"> Author - </span> {blog.authorid}

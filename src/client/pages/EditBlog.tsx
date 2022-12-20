@@ -1,88 +1,124 @@
 
+import e from "express";
 import React, { useEffect, useState } from "react";
 import { json, Link, useNavigate, useParams  } from 'react-router-dom';
 
 
 import Swal from "sweetalert2";
-
+import DeleteBlog from "./DeleteBlog";
 
 
 
 const EditBlog = () => {
+    const nav = useNavigate();
+    const backToBlogs = () => {
+        nav('/blogs')
+    }
     
     const MAX = 5000
     const { id } = useParams();
     const [authorid, setAuthorid] = useState<string>('')
     const [title, setTitle] = useState<string>('')
     const [content, setContent] = useState<string>('')
-
-    useEffect(() => {
-        fetch(`/api/blogs/${id}`)
-            .then(res => res.json())
-            .then(data => {
-                setTitle(data.title)
-                setContent(data.content)
-                setAuthorid(data.authorid)
-            })
-            .catch(console.error)
-    },[])
-
     const [tags, setTags] = useState<string>('')
     const [selectedTagId, setSelectedTagID] = useState<number>()
-
+    
+    useEffect(() => {
+        fetch(`/api/blogs/${id}`)
+        .then(res => res.json())
+        .then(data => {
+            setTitle(data.title)
+            setContent(data.content)
+            setAuthorid(data.authorid)
+        })
+        .catch(console.error)
+    },[])
+    
+    
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         blogToEdit();
     }
-    const nav = useNavigate();
-    const backToBlogs = () => {
-        nav('/blogs')
-    }
     
+    const handleDeleteBlog = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault
+        fetch(`/api/blogs/${id}`, {method: "DELETE"})
+            .then(res => {
+                if (!res.ok) {
+                    Swal.fire({
+                        title: 'Fuck!',
+                        icon: 'error',
+                        text: 'blog not Deleted! Fail.',
+                        confirmButtonText: 'not cool'
+                    });
+                } else {     
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete it!'
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                          Swal.fire(
+                            'Deleted!',
+                            "Why Have You Wasted Everyone's Time?.",
+                            'success'
+                          )}
+                        nav('/blogs')
+                      })
+            }});
+             
+    }
    
-
-const blogToEdit = async () => {
+    
+    
+    
+    const blogToEdit = async () => {
         const blog = {
             
             authorid,
             title,
             content
         }
-
-
-       
-
-    let res = await fetch(`/api/blogs/${id}`, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(blog)
         
-    })
-    if(res.ok) {
-        Swal.fire({
-            title: 'Success!',
-            icon: 'success',
-            text: 'Your Blog Has Been Updated',
-            confirmButtonText: 'Do It Right The First Time!'
-          });
-          backToBlogs();
-    } else {
-     
-        Swal.fire({
-            title: 'Fuck!',
-            icon: 'error',
-            text: 'blog not posted! Fail.',
-            confirmButtonText: 'not cool'
-          });
+        
+        
+        
+        let res = await fetch(`/api/blogs/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(blog)
+            
+        })
+        if(res.ok) {
+            Swal.fire({
+                title: 'Success!',
+                icon: 'success',
+                text: 'Your Blog Has Been Updated',
+                confirmButtonText: 'Do It Right The First Time!'
+            });
+            backToBlogs();
+        } else {
+            
+            Swal.fire({
+                title: 'Fuck!',
+                icon: 'error',
+                text: 'blog not posted! Fail.',
+                confirmButtonText: 'not cool'
+            });
+        }
     }
-}
-
-
-
-return (
-    <div className="container col-8 bg-secondary">
+    
+    
+    
+    
+    return (
+        <div className="container col-8 bg-secondary">
         <div className="form-group">
             <label>Author</label>
             <input 
@@ -109,24 +145,30 @@ return (
                     <option>#</option>
                 </select>
             </div>
-            <div className="form-group">
+            
                 <label>Edit Blog</label>
-                <div >
+                
                 <textarea  style={{resize: 'none'}} rows={50} className=" col-12 rounded bg-blogbg  card-text " 
                 placeholder= "Blog Entry"
-                value={content}
+                defaultValue={content}
                 onChange={(e) => setContent(e.target.value)}
-                ></textarea ></div>
+                ></textarea >
                 <div className="d-flex justify-content-end">
                 <span className="mx-3">{content.length}/{MAX}</span>
                 <button
                 value="Submit Blog"
                 className=" my-3 btn btn-dark rounded btn-outline-primary " 
                 onClick={handleClick}
-                >Submit Edit</button></div>
+                >Submit Edit</button>
+                <button
+                value="Submit Blog"
+                className=" my-3 btn btn-danger rounded btn-outline-primary " 
+                onClick={handleDeleteBlog}
+                >Delete Blog</button>
             </div>
         </div>
 );
-}
 
+
+}
 export default EditBlog;

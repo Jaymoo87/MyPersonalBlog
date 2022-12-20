@@ -25,7 +25,7 @@ const BlogCard = () => {
   
             <h3 className="card-title text-center pt-3 mx-3 ">{blog?.title}</h3>
   
-            <textarea readOnly style={{resize: 'none'}} rows={20} className=" rounded bg-blogbg m-5 card-text ">{blog?.content}</textarea>
+            <textarea readOnly style={{resize: 'none'}} rows={20} defaultValue={blog?.content} className=" rounded bg-blogbg m-5 card-text "></textarea>
             <div className="d-flex justify-content-end mx-2">
               <h6 className="  d-flex card-text fst-italic">Author: {blog?.authorid}</h6>
               
