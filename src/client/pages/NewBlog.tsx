@@ -1,11 +1,11 @@
 import { response } from "express";
 import React, { useEffect, useState } from "react";
 import { json, Link, useNavigate, useParams  } from 'react-router-dom';
+import Select from 'react-select'
+import makeAnimated from 'react-select/animated'
 
 
 import Swal from "sweetalert2";
-import  { createBrowserHistory } from "history"
-import { IBlog } from "../../types";
 
 const AddNewBlog = () => {
 
@@ -27,9 +27,16 @@ const AddNewBlog = () => {
         nav('/blogs')
     }
   
-   
-
+   const options = [
+    {value: "tech", label: "Tech"},
+    {value: "family", label: "Family"},
+    {value: "sports", label: "Sports"},
+    {value: "medicine", label: "Medicine"},
+    {value: "story", label: "Story"}
+]
+const [tag, setTag] = useState([])
 const newBlog = async () => {
+    
         const blog = {
             
             authorid: authorid,
@@ -65,6 +72,9 @@ const newBlog = async () => {
 
 
 
+
+
+
 return (
     <div className="container col-8 bg-secondary">
         <div className="form-group">
@@ -85,17 +95,32 @@ return (
             onChange={(e) => setTitle(e.target.value)}
             ></input>
                 <label>Select a Tag</label>
-                <select className="form-control">
+               
+
+                <Select options={options}
+                        // onChange={setTag}
+                        components={makeAnimated()}
+                        isMulti
+                        placeholder="Select a Tag"
+                        autoFocus
+                        isSearchable
+                        />
+                {/* <Select options={options}
+                        isMulti
+                        className="basic-multi-select"
+                        name= "tags"
+                        />
+                    <option value={0}>#</option>
                     <option>#</option>
                     <option>#</option>
-                    <option># sports</option>
                     <option>#</option>
-                    <option>#</option>
-                </select>
+                    <option>#</option> */}
+               
             </div>
             <div className="form-group">
                 <label>Submit Blog</label>
                 <textarea 
+                style={{resize: 'none'}} rows={20}
                 className="form-control" 
                 placeholder="Your Blog Entry Here"
                 value={content}

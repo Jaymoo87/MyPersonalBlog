@@ -21,14 +21,14 @@ const Blogs = () => {
   }, []);
 
 return (
-  <div className="row col-12 d-flex justify-content-around p-5">
+  <div className="row col-12 d-inline-flex flex-wrap justify-content-around p-5">
   {blogs.map((blog) => (
     <div
     key={`blog-card-${blog.id}`}
-    className=" d-block col-12 col-md-6 col-sm-12 mt-4"
+    className=" d-flex col-12 col-md-6 col-sm-12 mt-4"
     >
-      <div className="mb-2 card shadow-lg bg-primary border border-info">
-      <img className="border border-primary rounded-pill" style={{ aspectRatio: 2 / 1 }} src='https://media.wired.com/photos/5cc244c9af643e2f373ebb28/125:94/w_2375,h_1786,c_limit/Coding-Becomes-Criminal.jpg' />
+      <div className="mb-2 card align-items-stretch shadow-lg bg-primary border border-info">
+      <img className=" rounded-pill p-1" style={{ aspectRatio: 2 / 1 }} src='https://media.wired.com/photos/5cc244c9af643e2f373ebb28/125:94/w_2375,h_1786,c_limit/Coding-Becomes-Criminal.jpg' />
         <div className="row card-body"></div>
         <h3 className="card-title text-center mx-3">{blog.title}</h3>
 

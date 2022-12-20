@@ -5,7 +5,7 @@ import { json, Link, useNavigate, useParams  } from 'react-router-dom';
 
 
 import Swal from "sweetalert2";
-import DeleteBlog from "./DeleteBlog";
+
 
 
 
@@ -41,17 +41,7 @@ const EditBlog = () => {
     }
     
     const handleDeleteBlog = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault
-        fetch(`/api/blogs/${id}`, {method: "DELETE"})
-            .then(res => {
-                if (!res.ok) {
-                    Swal.fire({
-                        title: 'Fuck!',
-                        icon: 'error',
-                        text: 'blog not Deleted! Fail.',
-                        confirmButtonText: 'not cool'
-                    });
-                } else {     
+        e.preventDefault();
                     Swal.fire({
                         title: 'Are you sure?',
                         text: "You won't be able to revert this!",
@@ -61,13 +51,26 @@ const EditBlog = () => {
                         cancelButtonColor: '#d33',
                         confirmButtonText: 'Yes, delete it!'
                       }).then((result) => {
-                        if (result.isConfirmed) {
-                          Swal.fire(
-                            'Deleted!',
-                            "Why Have You Wasted Everyone's Time?.",
-                            'success'
-                          )}
-                        nav('/blogs')
+                          if (result.isConfirmed) {
+                             fetch(`/api/blogs/${id}`, {method: "DELETE"})
+                                  .then(res => {
+                                      if (!res.ok) {
+                                          Swal.fire({
+                                              title: 'Fuck!',
+                                              icon: 'error',
+                                              text: 'blog not Deleted! Fail.',
+                                              confirmButtonText: 'not cool'
+                                          });
+                                         
+                                } else {
+                                    Swal.fire(
+                                        'Deleted!',
+                                        "Why Have You Wasted Everyone's Time?.",
+                                        'success'
+                                        )
+                                        .then(() => nav('/blogs'))
+                                }
+                        
                       })
             }});
              
