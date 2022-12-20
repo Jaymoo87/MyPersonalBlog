@@ -4,7 +4,7 @@ $secondary: #7F9C96;
 $success: #1B4079;
 $info: #13101c;
 $warning: #8FAD88;
-$danger: #d62518;
+$danger: #851a0c;
 $light: #f8f9fa;
 $dark: #4D7C8A;
 $blogbg: #b9d6e02d;
@@ -23,4 +23,9 @@ $theme-colors: (
 	// add any additional color below
 );
 
+.swal-overlay{
+	
+	background-color: #eb091591
+}
 @import '../../../node_modules/bootstrap/scss/bootstrap.scss';
+// @import '@sweetalert2/themes/dark/dark.scss'

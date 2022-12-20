@@ -54,6 +54,7 @@ const newBlog = async () => {
     })
     if(res.ok) {
         Swal.fire({
+            
             title: 'Success!',
             text: 'Your Blog Has Been Submitted',
             confirmButtonText: 'Cool'

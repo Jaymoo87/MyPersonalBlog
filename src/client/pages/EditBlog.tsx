@@ -43,11 +43,17 @@ const EditBlog = () => {
     const handleDeleteBlog = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
                     Swal.fire({
+                        backdrop:`#5cbecf6e`,
+                        imageUrl: "https://media1.giphy.com/media/5PiIuCHlkQ58Y/giphy.gif?cid=ecf05e47pb9pnypw8a44td6ky0o63ezynrfiueg4maf1ulqe&rid=giphy.gif&ct=g",
+                        imageWidth: 400,
+                        imageHeight: 200,
+                        color: '#13101c',             
+                        customClass: 'swal-overlay' ,             
                         title: 'Are you sure?',
                         text: "You won't be able to revert this!",
-                        icon: 'warning',
+                        
                         showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
+                        confirmButtonColor: 'btn btn-danger',
                         cancelButtonColor: '#d33',
                         confirmButtonText: 'Yes, delete it!'
                       }).then((result) => {
