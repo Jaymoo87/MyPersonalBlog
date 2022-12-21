@@ -1,38 +1,46 @@
 import * as express from 'express';
-import db from './api'
-import blogs from './api/blogs'
+import db from '../db'
+import blogs from '../db/blogs'
 
 
-const router = express.Router();
+const blogRouter = express.Router();
 
-router.get('/api/hello', (req, res, next) => {
-    res.json('World');
-});
 
-router.get("/api/blogs", async (req, res) => {
-  
+blogRouter.get("/", async (req, res) => {
+   
     try {
-      res.json(await db.blogs.getAllBlogs());
+
+        const blogs = (await db.blogs.getAllBlogs())[0]
+
+        const blogsWithTagArray = blogs.map(b => {
+            const tagArray = (b.tags ?  (b.tags as unknown as string).split(',') : [])
+            return {...b, tags: tagArray}
+        })
+
+        res.json(blogsWithTagArray);
     } catch (e) {
       console.log(e);
       res.sendStatus(500);
     }
   });
 
-  router.get("/api/blogs/:id", async (req, res) => {
+  blogRouter.get("/:id", async (req, res) => {
     let id = Number(req.params.id);
     try {
-     res.json((await db.blogs.getOneBlog(id))[0]);
+      const blog =(await db.blogs.getOneBlog(id))[0][0]
+      blog.tags =  (blog.tags ?  (blog.tags as unknown as string).split(',') : [])
+
+     res.json(blog);
     } catch (e) {
       console.log(e);
       res.sendStatus(500);
     }
   });
 
-  router.delete("/api/blogs/:id", async (req, res) => {
+  blogRouter.delete("/:id", async (req, res) => {
     let id = Number(req.params.id);
     try {
-      res.json((await db.blogs.deleteBlog(id))[0]);
+      res.json((await db.blogs.deleteBlog(id)));
     } catch (e) {
       console.log(e);
       res.sendStatus(500);
@@ -41,7 +49,7 @@ router.get("/api/blogs", async (req, res) => {
 
 
 
-  router.post("/api/blogs", async(req, res) => {
+  blogRouter.post("/", async(req, res) => {
     try{  
     const { authorid, content, title } = req.body;
    
@@ -58,7 +66,7 @@ router.get("/api/blogs", async (req, res) => {
      }
    });
 
-   router.put('/api/blogs/:id', async (req, res) => {
+   blogRouter.put('/:id', async (req, res) => {
     let blogid = Number(req.params.id);
   
     const { authorid, content, title, id } = req.body;
@@ -77,4 +85,4 @@ router.get("/api/blogs", async (req, res) => {
 
 
 
-export default router;
+export default blogRouter;
