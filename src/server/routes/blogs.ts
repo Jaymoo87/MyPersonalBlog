@@ -76,13 +76,18 @@ blogRouter.get("/", async (req, res) => {
    blogRouter.put('/:id', async (req, res) => {
     let blogid = Number(req.params.id);
   
-    const { authorid, content, title, id } = req.body;
+    const { authorid, content, title, tagIDArray } = req.body;
   
     if (!authorid || !content || !title) return res.status(400).json({ message: "Need to know who you are and what you said and a damn title!" });
   
           try {
             const BlogToEdit = { authorid, content, title }
             await db.blogs.editBlog(BlogToEdit, blogid)
+            await db.blogtags.deleteBlogTags(blogid)
+            for await (const tagID of tagIDArray) {
+              await db.blogtags.postBlogTags(blogid, tagID)
+            }
+
             res.status(201).json({ message: "Blog has been updated, try to do it right the first time" });
           } catch (e) {
             console.log(e);

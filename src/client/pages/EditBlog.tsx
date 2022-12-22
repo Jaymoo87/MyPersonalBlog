@@ -100,7 +100,9 @@ const EditBlog = () => {
   };
 
   const blogToEdit = async () => {
+    const tagIDArray = selectedTagIds.map((st) => st.value);
     const blog = {
+      tagIDArray,
       authorid,
       title,
       content,
