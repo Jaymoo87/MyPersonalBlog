@@ -1,6 +1,6 @@
 import * as express from 'express';
 import db from '../db'
-import blogs from '../db/blogs'
+import blogs, { getAllTags } from '../db/blogs'
 
 
 const blogRouter = express.Router();
@@ -51,7 +51,7 @@ blogRouter.get("/", async (req, res) => {
 
   blogRouter.post("/", async(req, res) => {
     try{  
-    const { authorid, content, title } = req.body;
+    const { authorid, content, title,  } = req.body;
    
     if(!content || !authorid || !title) return res.status(400).json({ message: "You forgot your user id and a message... what are you doing???!"})
     const BlogData = await blogs.postBlog(authorid, title, content)

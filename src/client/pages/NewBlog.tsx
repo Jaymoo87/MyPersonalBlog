@@ -1,10 +1,12 @@
 import { response } from "express";
 import React, { useEffect, useState } from "react";
 import { json, Link, useNavigate, useParams } from "react-router-dom";
-import Select from "react-select";
+import ReactSelect, { MultiValue } from "react-select";
 import makeAnimated from "react-select/animated";
 
 import Swal from "sweetalert2";
+import { ITag } from "../../types";
+import { IJoinedBlog } from "../../types";
 
 const AddNewBlog = () => {
   const MAX = 5000;
@@ -12,8 +14,9 @@ const AddNewBlog = () => {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
 
-  const [tags, setTags] = useState<string>("");
-  const [selectedTagId, setSelectedTagID] = useState<number>();
+  const [selectOptions, setSelectOptions] = useState<{ value: number; label: string }[]>();
+  const [tags, setTags] = useState<ITag[]>();
+  const [selectedTags, setSelectedTags] = useState<MultiValue<{ value: number; label: string }>>();
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -24,13 +27,22 @@ const AddNewBlog = () => {
     nav("/blogs");
   };
 
-  const options = [
-    { value: "tech", label: "Tech" },
-    { value: "family", label: "Family" },
-    { value: "sports", label: "Sports" },
-    { value: "medicine", label: "Medicine" },
-    { value: "story", label: "Story" },
-  ];
+  useEffect(() => {
+    fetch(`/api/tags`)
+      .then((res) => res.json())
+      .then((data) => {
+        setTags(data);
+        setSelectOptions(data.map((t) => ({ value: t.id!, label: t.tagname })));
+      });
+  }, []);
+
+  // const options = [
+  //   { value: "tech", label: "Tech" },
+  //   { value: "family", label: "Family" },
+  //   { value: "sports", label: "Sports" },
+  //   { value: "medicine", label: "Medicine" },
+  //   { value: "story", label: "Story" },
+  // ];
   const [tag, setTag] = useState([]);
   const newBlog = async () => {
     const blog = {
@@ -84,15 +96,16 @@ const AddNewBlog = () => {
         ></input>
         <label>Select a Tag</label>
 
-        <Select
-          options={options}
+        <ReactSelect
+          options={selectOptions}
           // onChange={setTag}
           components={makeAnimated()}
+          placeholder="Pick Some Hash"
           isMulti
-          placeholder="Select a Tag"
+          onChange={(e) => setSelectOptions(e as { value: number; label: string }[])}
           autoFocus
           isSearchable
-        />
+        ></ReactSelect>
         {/* <Select options={options}
                         isMulti
                         className="basic-multi-select"
