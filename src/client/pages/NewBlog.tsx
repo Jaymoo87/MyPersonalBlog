@@ -95,7 +95,6 @@ const AddNewBlog = () => {
           onChange={(e) => setTitle(e.target.value)}
         ></input>
         <label>Select a Tag</label>
-        {/* onChange={(e) => setOptions(e as { value: number; label: string }[])} */}
         <ReactSelect
           isMulti
           options={options}
@@ -103,6 +102,7 @@ const AddNewBlog = () => {
           components={makeAnimated()}
           placeholder="Pick Some Hash"
         ></ReactSelect>
+        {/* onChange={(e) => setOptions(e as { value: number; label: string }[])} */}
         {/* <Select options={options}
                         isMulti
                         className="basic-multi-select"

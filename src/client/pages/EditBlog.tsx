@@ -1,6 +1,8 @@
 import e from "express";
 import React, { useEffect, useState } from "react";
 import { json, Link, useNavigate, useParams } from "react-router-dom";
+import ReactSelect, { MultiValue } from "react-select";
+import makeAnimated from "react-select/animated";
 
 import Swal from "sweetalert2";
 import { IBlog, IJoinedBlog, ITag } from "../../types";
@@ -19,12 +21,23 @@ const EditBlog = () => {
   const [tags, setTags] = useState<ITag[]>([]);
   const [selectedTagId, setSelectedTagID] = useState<number>(0);
   const [blogTags, setBlogTags] = useState<string[]>([]);
+  const [options, setOptions] = useState<MultiValue<{ value: number; label: string }>>();
 
   useEffect(() => {
     fetch(`/api/tags`)
       .then((res) => res.json())
-      .then((data) => setTags(data));
-
+      .then((data) => {
+        setTags(data);
+        setOptions(data.map((t: ITag) => ({ value: t.id!, label: t.tagname })));
+      });
+  }, []);
+  useEffect(() => {
+    fetch(`/api/tags`)
+      .then((res) => res.json())
+      .then((data) => {
+        setTags(data);
+        setOptions(data.map((t: ITag) => ({ value: t.id!, label: t.tagname })));
+      });
     fetch(`/api/blogs/${id}`)
       .then((res) => res.json())
       .then((data: IJoinedBlog) => {
@@ -142,7 +155,14 @@ const EditBlog = () => {
           onChange={(e) => setTitle(e.target.value)}
         ></input>
         <label>Select a Tag</label>
-        <select
+        <ReactSelect
+          isMulti
+          options={options}
+          isSearchable
+          components={makeAnimated()}
+          placeholder="Pick Some Hash"
+        ></ReactSelect>
+        {/* <select
           className="form-control"
           onChange={(e) => setSelectedTagID(Number(e.target.value))}
           value={selectedTagId}
@@ -151,7 +171,7 @@ const EditBlog = () => {
           {tags.map((t) => {
             return <option value={t.id}>#{t.tagname}</option>;
           })}
-        </select>
+        </select> */}
       </div>
       <label>Edit Blog</label>
       <textarea
