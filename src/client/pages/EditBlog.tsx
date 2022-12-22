@@ -96,6 +96,7 @@ const EditBlog = () => {
               imageWidth: 400,
               imageHeight: 200,
               color: "#13101c",
+              text: "Thanks For Wasting Everyone's Time",
             }).then(() => nav("/blogs"));
           }
         });
