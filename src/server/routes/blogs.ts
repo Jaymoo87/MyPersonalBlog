@@ -59,13 +59,13 @@ blogRouter.get("/", async (req, res) => {
     const BlogData = await db.blogs.postBlog(authorid, title, content)
 
         for await (const tagID of selectedTagsArray) {
-          BlogData.insertId
+          
           await db.blogtags.postBlogTags(BlogData.insertId, tagID)
         }
    
     
    
-    res.status(201).json({content: "it worked!", id: 3})
+    res.status(201).json({content: "it worked!", id: BlogData.insertId})
    
      } catch (e) {
        console.log(e);

@@ -7,6 +7,8 @@ import makeAnimated from "react-select/animated";
 import Swal from "sweetalert2";
 import { IBlog, IJoinedBlog, ITag } from "../../types";
 
+type MultiValueSelect = MultiValue<{ value: number; label: string }>;
+
 const EditBlog = () => {
   const nav = useNavigate();
   const backToBlogs = () => {
@@ -19,18 +21,10 @@ const EditBlog = () => {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [tags, setTags] = useState<ITag[]>([]);
-  const [selectedTagId, setSelectedTagID] = useState<number>(0);
+  const [selectedTagIds, setSelectedTagIDs] = useState<MultiValueSelect>([]);
   const [blogTags, setBlogTags] = useState<string[]>([]);
-  const [options, setOptions] = useState<MultiValue<{ value: number; label: string }>>();
+  const [options, setOptions] = useState<MultiValueSelect>();
 
-  useEffect(() => {
-    fetch(`/api/tags`)
-      .then((res) => res.json())
-      .then((data) => {
-        setTags(data);
-        setOptions(data.map((t: ITag) => ({ value: t.id!, label: t.tagname })));
-      });
-  }, []);
   useEffect(() => {
     fetch(`/api/tags`)
       .then((res) => res.json())
@@ -52,8 +46,9 @@ const EditBlog = () => {
   useEffect(() => {
     if (!tags.length) return;
     const tagNameArray = tags.filter((t) => blogTags.includes(t.tagname));
-    setSelectedTagID(tagNameArray[0]?.id || 0);
-    console.log({ tags, blogTags, tagNameArray });
+    const tNAT = tagNameArray.map((ht) => ({ value: ht.id!, label: ht.tagname }));
+    setSelectedTagIDs(tNAT);
+    console.log({ tags, blogTags, tagNameArray, tNAT });
   }, [tags, blogTags]);
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -158,7 +153,9 @@ const EditBlog = () => {
         <label className="text-dark">Select a Tag</label>
         <ReactSelect
           isMulti
+          value={selectedTagIds}
           options={options}
+          onChange={(e) => setSelectedTagIDs(e as MultiValueSelect)}
           isSearchable
           components={makeAnimated()}
           placeholder="Pick Some Hash"

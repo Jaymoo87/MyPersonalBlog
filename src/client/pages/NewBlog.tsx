@@ -16,7 +16,7 @@ const AddNewBlog = () => {
 
   const [options, setOptions] = useState<MultiValue<{ value: number; label: string }>>();
   const [tags, setTags] = useState<ITag[]>();
-  const [selectedTags, setSelectedTags] = useState<MultiValue<{ value: number; label: string }>>();
+  const [selectedTags, setSelectedTags] = useState<MultiValue<{ value: number; label: string }>>([]);
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -37,8 +37,11 @@ const AddNewBlog = () => {
   }, []);
 
   const newBlog = async () => {
+    const selectedTagsArray = selectedTags.map((st) => st.value);
+
     const blog = {
-      authorid: authorid,
+      selectedTagsArray,
+      authorid,
       title,
       content,
     };
@@ -89,7 +92,7 @@ const AddNewBlog = () => {
         <label className="text-dark">Select a Tag</label>
         <ReactSelect
           isMulti
-          onChange={(e) => setSelectedTags(e)}
+          onChange={(e) => setSelectedTags(e as MultiValue<{ value: number; label: string }>)}
           options={options}
           isSearchable
           components={makeAnimated()}
