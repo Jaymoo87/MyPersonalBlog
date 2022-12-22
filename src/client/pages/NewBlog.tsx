@@ -14,7 +14,7 @@ const AddNewBlog = () => {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
 
-  const [selectOptions, setSelectOptions] = useState<{ value: number; label: string }[]>();
+  const [options, setOptions] = useState<MultiValue<{ value: number; label: string }>>();
   const [tags, setTags] = useState<ITag[]>();
   const [selectedTags, setSelectedTags] = useState<MultiValue<{ value: number; label: string }>>();
 
@@ -32,7 +32,7 @@ const AddNewBlog = () => {
       .then((res) => res.json())
       .then((data) => {
         setTags(data);
-        setSelectOptions(data.map((t) => ({ value: t.id!, label: t.tagname })));
+        setOptions(data.map((t: ITag) => ({ value: t.id!, label: t.tagname })));
       });
   }, []);
 
@@ -95,16 +95,13 @@ const AddNewBlog = () => {
           onChange={(e) => setTitle(e.target.value)}
         ></input>
         <label>Select a Tag</label>
-
+        {/* onChange={(e) => setOptions(e as { value: number; label: string }[])} */}
         <ReactSelect
-          options={selectOptions}
-          // onChange={setTag}
+          isMulti
+          options={options}
+          isSearchable
           components={makeAnimated()}
           placeholder="Pick Some Hash"
-          isMulti
-          onChange={(e) => setSelectOptions(e as { value: number; label: string }[])}
-          autoFocus
-          isSearchable
         ></ReactSelect>
         {/* <Select options={options}
                         isMulti
