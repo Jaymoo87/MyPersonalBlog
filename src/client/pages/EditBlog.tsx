@@ -137,25 +137,25 @@ const EditBlog = () => {
   };
 
   return (
-    <div className="container col-8 bg-secondary">
+    <div className="container col-8 bg-primary rounded">
       <div className="form-group">
-        <label>Author</label>
+        <label className="text-dark">Author</label>
         <input
           type="text"
-          className="form-control"
+          className="form-control bg-blogbg"
           placeholder="Your Name"
           value={authorid}
           onChange={(e) => setAuthorid(e.target.value)}
         ></input>
-        <label>Edit Title</label>
+        <label className="text-dark">Edit Title</label>
         <input
           type="text"
-          className="form-control"
+          className="form-control bg-blogbg"
           placeholder="Blog Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         ></input>
-        <label>Select a Tag</label>
+        <label className="text-dark">Select a Tag</label>
         <ReactSelect
           isMulti
           options={options}
@@ -163,18 +163,8 @@ const EditBlog = () => {
           components={makeAnimated()}
           placeholder="Pick Some Hash"
         ></ReactSelect>
-        {/* <select
-          className="form-control"
-          onChange={(e) => setSelectedTagID(Number(e.target.value))}
-          value={selectedTagId}
-        >
-          <option value={0}>Hash it UP!</option>
-          {tags.map((t) => {
-            return <option value={t.id}>#{t.tagname}</option>;
-          })}
-        </select> */}
       </div>
-      <label>Edit Blog</label>
+      <label className="text-dark">Edit Blog</label>
       <textarea
         style={{ resize: "none" }}
         rows={50}
@@ -183,7 +173,7 @@ const EditBlog = () => {
         defaultValue={content}
         onChange={(e) => setContent(e.target.value)}
       ></textarea>{" "}
-      <span className="d-flex justify-content-end mx-3">
+      <span className="d-flex justify-content-end text-light mx-3">
         {content.length}/{MAX}
       </span>
       <div className="d-flex justify-content-start">

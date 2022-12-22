@@ -36,14 +36,6 @@ const AddNewBlog = () => {
       });
   }, []);
 
-  // const options = [
-  //   { value: "tech", label: "Tech" },
-  //   { value: "family", label: "Family" },
-  //   { value: "sports", label: "Sports" },
-  //   { value: "medicine", label: "Medicine" },
-  //   { value: "story", label: "Story" },
-  // ];
-  const [tag, setTag] = useState([]);
   const newBlog = async () => {
     const blog = {
       authorid: authorid,
@@ -76,56 +68,47 @@ const AddNewBlog = () => {
   };
 
   return (
-    <div className="container col-8 bg-secondary">
+    <div className="container rounded col-8 bg-secondary">
       <div className="form-group">
-        <label>Author</label>
+        <label className="text-dark">Author</label>
         <input
           type="text"
-          className="form-control"
+          className="form-control bg-blogbg"
           placeholder="Your Name"
           value={authorid}
           onChange={(e) => setAuthorid(e.target.value)}
         ></input>
-        <label>Title</label>
+        <label className="text-dark">Title</label>
         <input
           type="text"
-          className="form-control"
+          className="form-control bg-blogbg"
           placeholder="Blog Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         ></input>
-        <label>Select a Tag</label>
+        <label className="text-dark">Select a Tag</label>
         <ReactSelect
           isMulti
+          onChange={(e) => setSelectedTags(e)}
           options={options}
           isSearchable
           components={makeAnimated()}
           placeholder="Pick Some Hash"
         ></ReactSelect>
         {/* onChange={(e) => setOptions(e as { value: number; label: string }[])} */}
-        {/* <Select options={options}
-                        isMulti
-                        className="basic-multi-select"
-                        name= "tags"
-                        />
-                    <option value={0}>#</option>
-                    <option>#</option>
-                    <option>#</option>
-                    <option>#</option>
-                    <option>#</option> */}
       </div>
       <div className="form-group">
-        <label>Submit Blog</label>
+        <label className="text-dark">Submit Blog</label>
         <textarea
           style={{ resize: "none" }}
           rows={20}
-          className="form-control"
+          className="form-control bg-blogbg"
           placeholder="Your Blog Entry Here"
           value={content}
           onChange={(e) => setContent(e.target.value)}
         ></textarea>
         <div className="d-flex justify-content-end">
-          <span className="mx-3">
+          <span className="mx-3 text-dark">
             {content.length}/{MAX}
           </span>
           <button value="Submit Blog" className=" my-3 btn btn-dark rounded " onClick={handleClick}>

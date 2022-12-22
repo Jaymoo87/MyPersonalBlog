@@ -39,19 +39,14 @@ const BlogCard = () => {
     <div className="d-flex container justify-content-center bg-secondary border-dark shadow p-2">
       <div key={`film-card-${blog?.id}`} className=" d-flex justify-content-center col-12 col-sm-12 mt-4">
         <div className="d-flex mb-2 col-10 card shadow-lg bg-primary border border-info">
-          <h3 className="card-title text-center pt-3 mx-3 ">{blog?.title}</h3>
+          <h3 className=" bg-dark rounded card-title text-center p-3 m-3 ">{blog?.title}</h3>
           <div className="col-12 container d-flex justify-content-center">
             {blogTags.map((bt) => (
-              <h6 key={bt} className=" m-2 badge text-bg-success d-flex fst-italic col-2 justify-content-center">
+              <h6 key={bt} className=" m-2 badge text-bg-dark d-flex fst-italic col-2 justify-content-center">
                 {bt}
               </h6>
             ))}
           </div>
-
-          {/* <h6>{blogTags[1]}</h6>
-          <h6>{blogTags[2]}</h6>
-          <h6>{blogTags[3]}</h6>
-          <h6>{blogTags[4]}</h6> */}
 
           <textarea
             readOnly
