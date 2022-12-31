@@ -103,6 +103,7 @@ const AddNewBlog = () => {
       <div className="form-group">
         <label className="text-dark">Submit Blog</label>
         <textarea
+          maxLength={MAX}
           style={{ resize: "none" }}
           rows={20}
           className="form-control bg-blogbg"

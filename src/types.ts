@@ -4,6 +4,7 @@ export interface IBlog {
     content: string;
     title: string;
     _created?: Date | string;
+    _updated?: Date | string;
    
 }
 
