@@ -166,6 +166,7 @@ const EditBlog = () => {
       <label className="text-dark">Edit Blog</label>
       <textarea
         style={{ resize: "none" }}
+        maxLength={MAX}
         rows={50}
         className=" col-12 rounded bg-blogbg  card-text "
         placeholder="Blog Entry"
