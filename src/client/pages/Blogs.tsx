@@ -32,7 +32,7 @@ const Blogs = () => {
               <p className=" m-5 card-text text-secondary fw-bold ">{blog.content.substring(0, 250)}...</p>
               <div className="d-flex justify-content-between mx-2">
                 <h6 className=" text-info d-flex card-text fst-italic">
-                  <span className="text-info fw-bolder"> Author - </span> {blog.authorid}
+                  <span className="text-info fw-bolder"> Author - </span> {blog.authorname}
                 </h6>
                 <Link to={`/blogs/${blog.id}`} className="btn btn-sm d-flex shadow btn-dark btn-outline-primary mb-4">
                   Read Blog

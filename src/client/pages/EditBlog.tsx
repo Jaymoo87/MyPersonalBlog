@@ -18,6 +18,7 @@ const EditBlog = () => {
   const MAX = 5000;
   const { id } = useParams();
   const [authorid, setAuthorid] = useState<string | number>("");
+  const [authorname, setAuthourName] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [tags, setTags] = useState<ITag[]>([]);
@@ -38,6 +39,7 @@ const EditBlog = () => {
         setTitle(data.title);
         setContent(data.content);
         setAuthorid(data.authorid);
+        setAuthourName(data.authorname);
         setBlogTags(data.tags as string[]);
       })
       .catch(console.error);
@@ -138,11 +140,13 @@ const EditBlog = () => {
       <div className="form-group">
         <label className="text-dark">Author</label>
         <input
+          readOnly
+          disabled
+          style={{ userSelect: "none", cursor: "none" }}
           type="text"
           className="form-control bg-blogbg"
           placeholder="Your Name"
-          value={authorid}
-          onChange={(e) => setAuthorid(e.target.value)}
+          value={authorname}
         ></input>
         <label className="text-dark">Edit Title</label>
         <input
