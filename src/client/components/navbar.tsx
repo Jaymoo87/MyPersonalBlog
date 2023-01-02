@@ -7,9 +7,7 @@ const Navbar = () => {
       <NavLink
         to="/"
         className={({ isActive }) =>
-          `nav-link ${
-            isActive ? "active btn btn-dark text-light btn-outline-secondary" : "btn btn-dark text-light"
-          }`
+          `nav-link ${isActive ? "active btn btn-dark text-light btn-outline-secondary" : "btn btn-dark text-light"}`
         }
       >
         Home
@@ -17,14 +15,28 @@ const Navbar = () => {
       <NavLink
         to="/blogs"
         className={({ isActive }) =>
-          `nav-link ${
-            isActive ? "active btn btn-dark text-light btn-outline-secondary" : "btn btn-dark text-light"
-          }`
+          `nav-link ${isActive ? "active btn btn-dark text-light btn-outline-secondary" : "btn btn-dark text-light"}`
         }
       >
         Blogs
       </NavLink>
-     
+      <NavLink
+        to="/blogs/new"
+        className={({ isActive }) =>
+          `nav-link ${isActive ? "active btn btn-dark text-light btn-outline-secondary" : "btn btn-dark text-light"}`
+        }
+      >
+        Write A New Blog
+      </NavLink>
+
+      <NavLink
+        to="/donate"
+        className={({ isActive }) =>
+          `nav-link ${isActive ? "active btn btn-dark text-light btn-outline-secondary" : "btn btn-dark text-light"}`
+        }
+      >
+        $ Donate $
+      </NavLink>
     </nav>
   );
 };
