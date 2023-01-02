@@ -3,6 +3,7 @@ import * as mysql from 'mysql';
 import config from "../config";
 import blogs from './blogs'
 import blogtags from './blogtags';
+import donate from "../routes/donate"
 
 
 const pool = mysql.createPool(config.mysql)
@@ -18,5 +19,6 @@ export const Query = <T = mysql.OkPacket>  (query: string, values: unknown[] = [
 
 export default {
     blogtags,
-    blogs
+    blogs,
+    donate
 }
