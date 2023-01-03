@@ -4,11 +4,11 @@ import config from "../config"
 
 
 
-const stripe = new Stripe(config.mysql.password, {apiVersion: '2022-11-15'})
+const stripe = new Stripe(config.StripeInfo.api_key, {apiVersion: '2022-11-15'})
 
 const DonateRouter = express.Router();
 
-DonateRouter.post('/api/donate/', async (req, res, next) => {
+DonateRouter.post("/", async (req, res) => {
     const paymentMethod = req.body.paymentMethod;
     const amount = req.body.amount;
     try {

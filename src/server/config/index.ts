@@ -11,9 +11,13 @@ const mysql =  {
         "database": process.env.DB_DATABASE!
 
     }
-
-    export default {
-        mysql
+    const StripeInfo = {
+        api_key: process.env.STRIPE_API_KEY!
     }
 
+    export default {
+        mysql, StripeInfo
+    }
+
+    console.log(StripeInfo)
 
