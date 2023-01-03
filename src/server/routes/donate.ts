@@ -16,9 +16,12 @@ DonateRouter.post("/", async (req, res) => {
             currency: 'usd', 
             amount: Number(amount) * 100,
             payment_method: paymentMethod.id,
-            confirm: true
+            confirm: true,
+            
         });
-        res.json(fulfilled)        
+
+        res.json(fulfilled) 
+                
     } catch (error) {
         console.log(error)
         res.status(500).json({message: "fucked up the server"})

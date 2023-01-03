@@ -38,10 +38,7 @@ const Donate = (props: DonateProps) => {
         body: JSON.stringify({ amount, paymentMethod: paymentMethod }),
       });
 
-      const paymentDone = await res.json();
-      console.log(paymentDone);
       if (!res.ok) {
-        console.log({ message: error });
         Swal.fire({
           title: "Fuck!",
           icon: "error",
@@ -49,6 +46,8 @@ const Donate = (props: DonateProps) => {
           confirmButtonText: "not cool",
         });
       } else {
+        const paymentDone = await res.json();
+        console.log(paymentDone.result);
         Swal.fire({
           title: "Success!",
           text: "Thanks For The Chedda",

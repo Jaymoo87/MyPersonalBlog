@@ -19,5 +19,5 @@ const mysql =  {
         mysql, StripeInfo
     }
 
-    console.log(StripeInfo)
+    
 
