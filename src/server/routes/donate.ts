@@ -8,7 +8,7 @@ const stripe = new Stripe(config.mysql.password, {apiVersion: '2022-11-15'})
 
 const DonateRouter = express.Router();
 
-DonateRouter.post('/api/donate', async (req, res, next) => {
+DonateRouter.post('/api/donate/', async (req, res, next) => {
     const paymentMethod = req.body.paymentMethod;
     const amount = req.body.amount;
     try {

@@ -2,7 +2,7 @@ import * as express from 'express';
 import apiRouter from './routes';
 import * as path from 'path'
 
-import mysql from 'mysql'
+
 
 const app = express();
 

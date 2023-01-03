@@ -1,11 +1,14 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Donate = (props: DonateProps) => {
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
 
+  const nav = useNavigate();
   const stripe = useStripe();
   const elements = useElements();
 
@@ -28,17 +31,31 @@ const Donate = (props: DonateProps) => {
       console.log("error:", error);
     } else {
       console.log("paymentMethod", paymentMethod);
+
+      const res = await fetch("/api/donate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ amount, paymentMethod: paymentMethod }),
+      });
+
+      const paymentDone = await res.json();
+      console.log(paymentDone);
+      if (res.ok) {
+        Swal.fire({
+          title: "Success!",
+          text: "Thanks For The Chedda",
+          confirmButtonText: "Cool",
+        });
+        nav("/");
+      } else {
+        Swal.fire({
+          title: "Fuck!",
+          icon: "error",
+          text: "You Don't Really Want To Donate.",
+          confirmButtonText: "not cool",
+        });
+      }
     }
-
-    const res = await fetch("/api/donate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ amount, paymentMethod: paymentMethod }),
-    });
-
-    const paymentDone = await res.json();
-
-    console.log(paymentDone);
   };
   return (
     <main className="container d-flex justify-content-center">

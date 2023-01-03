@@ -13,7 +13,7 @@ const Navbar = () => {
         Home
       </NavLink>
       <NavLink
-        to="/blogs"
+        to="/blogs/"
         className={({ isActive }) =>
           `nav-link ${isActive ? "active btn btn-dark text-light btn-outline-secondary" : "btn btn-dark text-light"}`
         }
