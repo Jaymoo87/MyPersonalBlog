@@ -16,28 +16,9 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `authors`
---
-
-DROP TABLE IF EXISTS `authors`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `authors` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `authorname` varchar(45) NOT NULL,
-  `email` varchar(45) NOT NULL,
-  `_created` datetime DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `fk_authors_blogs1_idx` (`authorname`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `authors`
 --
 
-LOCK TABLES `authors` WRITE;
-/*!40000 ALTER TABLE `authors` DISABLE KEYS */;
 INSERT INTO `authors` VALUES (1,'Justin','Justin@gmail.com','2022-12-12 20:33:20');
 INSERT INTO `authors` VALUES (2,'Jen','Jen@gmail.com','2022-12-12 20:33:35');
 INSERT INTO `authors` VALUES (3,'Jamie','Jamie@gmail.com','2022-12-12 20:33:43');
@@ -45,34 +26,11 @@ INSERT INTO `authors` VALUES (4,'Logan','Logan@gmail.com','2022-12-12 20:33:51')
 INSERT INTO `authors` VALUES (5,'Emily','Emily@gmail.com','2022-12-12 20:33:59');
 INSERT INTO `authors` VALUES (6,'Melissa','Melissa@gmail.com','2022-12-12 20:34:46');
 INSERT INTO `authors` VALUES (7,'Amanda','Amanda@gmail.com','2022-12-12 20:34:56');
-/*!40000 ALTER TABLE `authors` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `blogs`
---
-
-DROP TABLE IF EXISTS `blogs`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `blogs` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `title` varchar(200) NOT NULL,
-  `content` varchar(5000) NOT NULL,
-  `authorid` varchar(45) NOT NULL,
-  `_created` datetime DEFAULT CURRENT_TIMESTAMP,
-  `_updated` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `fk_blogs_authors1_idx` (`authorid`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `blogs`
 --
 
-LOCK TABLES `blogs` WRITE;
-/*!40000 ALTER TABLE `blogs` DISABLE KEYS */;
 INSERT INTO `blogs` VALUES (29,'Taint Shrinkage: A Growing Concern','\n\n      In recent years, there has been a growing concern about taint shrinkage. Taints are an essential part of the body, and they play a vital role in maintaining good health and hygiene. However, there is a growing concern that taints are shrinking in size, and this could have serious consequences for our overall health and well-being.\n\nWhat is Taint Shrinkage?\n\nTaint shrinkage is the reduction in size of the taints. Taints are located in the perineum, which is the area of skin between the scrotum and the anus. They are made up of several layers of muscle and tissue, and they serve as a barrier between the genitals and the anus.\n\nTaints are an important part of the body, and they play a vital role in protecting these sensitive areas and maintaining good hygiene. However, there is a growing concern that taints are shrinking in size, and this could have serious consequences for our overall health and well-being.\n\nWhat Causes Taint Shrinkage?\n\nThere are a variety of factors that can contribute to taint shrinkage. One of the main causes is the aging process. As we get older, our bodies naturally experience changes, and taints are no exception. As we age, our taints may become smaller and less elastic.\n\nOther factors that can contribute to taint shrinkage include poor diet and lack of exercise, as well as certain medical conditions and medications. For example, certain medications and treatments, such as chemotherapy and radiation therapy, can have an impact on taint size.\n\nThe Consequences of Taint Shrinkage\n\nThe consequences of taint shrinkage can be serious, and they can have an impact on both physical and mental health. One of the main concerns is the increased risk of infections and other health problems. When taints shrink in size, they may not be able to properly protect the genitals and anus, which can increase the risk of infections and other issues.\n\nTaint shrinkage can also have an impact on mental health. Many people place a great deal of importance on their taints, and the loss of taint size can be a source of anxiety and insecurity. This can have a negative impact on self-esteem and overall well-being.\n\nWhat Can be Done to Address Taint Shrinkage?\n\nThere are several steps that can be taken to address taint shrinkage and maintain good taint health. One of the most important is to adopt a healthy lifestyle, including a balanced diet and regular exercise. This can help to maintain taint elasticity and prevent shrinkage.\n\nOther steps that can be taken to address taint shrinkage include:\n\nUsing moisturizers and other products to keep the taints hydrated and elastic\nAvoiding certain medications and treatments that can contribute to taint shrinkage\nSeeking medical treatment for any underlying medical conditions that may be causing taint shrinkage\n\nIf you are concerned about taint shrinkage, it\'s important to speak with a healthcare provider. They will be able to assess your individual situation and provide guidance on any necessary treatment or care. In some cases, it may be possible to reverse taint shrinkage or prevent it from occurring in the first place.\n\nConclusion\n\nTaint shrinkage is a growing concern, and it can have serious consequences for both physical and mental health. By adopting a healthy lifestyle and seeking medical treatment as needed, it is possible to maintain good taint health and prevent shrinkage. If you have any concerns about taint shrinkage, it\'s important to speak with a healthcare provider for guidance and support.\n\n','1','2022-12-19 21:30:17',NULL);
 INSERT INTO `blogs` VALUES (30,'Graphene','Graphene is a two-dimensional form of carbon, consisting of a single layer of carbon atoms arranged in a hexagonal lattice. It is known for its unique properties, including its extraordinary strength, conductivity, and transparency. These properties make graphene a promising material for a wide range of applications, including electronics, energy storage, and medicine.\n\nOne of the key benefits of graphene is its strength. Graphene is the strongest known material, with a tensile strength that is more than 100 times stronger than steel. This makes it an ideal material for use in structural applications, such as in the construction of bridges and buildings. Graphene is also extremely lightweight, which makes it an attractive material for use in the aerospace and automotive industries.\n\nGraphene is also an excellent conductor of electricity and heat, making it a promising material for use in electronics and energy storage. It has the potential to revolutionize the way we store and use energy, with applications in solar panels, batteries, and fuel cells. Graphene has also been shown to be effective in blocking electromagnetic radiation, making it a potential material for use in shielding and protective coatings.\n\nGraphene has also been identified as a potential material for use in medicine, with possible applications in drug delivery and tissue engineering. Its unique properties make it an attractive material for use in a wide range of medical applications, including wound dressings, drug delivery systems, and tissue scaffolds.\n\nDespite the many potential benefits of graphene, there are also challenges and limitations to its widespread adoption and use. One of the main challenges is the high cost of production, as graphene is currently produced in small quantities using labor-intensive techniques. There is also a need for further research and development to fully understand the potential applications and impacts of graphene, as well as to develop scalable and cost-effective production methods.','1','2022-12-20 00:22:48',NULL);
 INSERT INTO `blogs` VALUES (31,'Coding the Blog','As a software developer, I spend a lot of my time working on projects for my company\'s website. One of my primary responsibilities is maintaining and updating the blog section of the website, which includes hundreds of articles on a wide range of topics.\n\nWhile I enjoy my work, I found that I was spending a significant amount of time each day editing and proofreading the articles for errors and typos. It was a tedious and time-consuming task, and I often found myself feeling frustrated and drained after a long day of proofreading.\n\nOne day, I had an idea. I decided to create a program that would automatically edit and proofread the articles for me. I spent weeks designing and coding the program, and eventually I had a working prototype.\n\nTo test the program, I fed it one of our company\'s articles and sat back to watch. Much to my delight, the program was able to identify and correct errors and typos in the article almost instantly. I was thrilled with the results and couldn\'t wait to show my boss.\n\nThe next day, I presented the program to my boss, who was amazed by its capabilities. Impressed with my ingenuity, my boss decided to implement the program company-wide.\n\nSince implementing the program, my workdays have been much easier. The program is able to handle the majority of the editing and proofreading tasks, which has allowed me to focus on more important tasks and projects. I am grateful for the opportunity to use my skills and expertise to create a tool that has made such a significant impact on my work and the work of my colleagues.\n\nI am also grateful for the support and encouragement of my boss and colleagues, who have recognized the value of my work and the potential of this program. I believe that this experience has demonstrated the importance of innovation and collaboration in the tech industry, and I am excited to see what other solutions and innovations we can bring to our company and beyond.\n\nOverall, I am grateful for the opportunity to use my skills and knowledge to make a difference in my work and to help others in their work as well. I am confident that this program will continue to be a valuable asset to our company and to others who may benefit from its capabilities.','1','2022-12-20 00:36:07',NULL);
@@ -82,150 +40,28 @@ INSERT INTO `blogs` VALUES (34,'Simulation?!?','I think I\'m going to need a big
 INSERT INTO `blogs` VALUES (44,'Those Fingers Stink, It\'s Bad. ','As a scientist, it is my job to investigate and understand the world around us. And when I heard about the outbreak of smelly fingers in a small town, I knew that I had to get involved.\n\nUpon arriving in the town, I was immediately struck by the extent of the problem. Everywhere I looked, people were scratching their heads and wrinkling their noses, trying to figure out why their fingers smelled so bad. Some had tried using special soaps or creams to get rid of the smell, but nothing seemed to work.\n\nAs I began my investigation, I started by collecting samples of people\'s skin and conducting a series of tests in the laboratory. I tried different treatments and experimented with various methods, hoping to find a clue about the cause of the smelly fingers.\n\nBut despite my efforts, I was unable to find a clear answer. The results of my tests were puzzling and contradictory, and I found myself growing more and more frustrated as the days went by. I knew that I had to keep searching for the truth, no matter how difficult it seemed.\n\nAs the epidemic spread to other towns and cities, it became clear that this was no ordinary problem. The smelly fingers were affecting more and more people, and it seemed that no one was immune. The town council held a meeting to discuss the issue, and they decided to call in a team of scientists to help find a solution.','1','2022-12-21 10:51:52',NULL);
 INSERT INTO `blogs` VALUES (51,'lkjashdfkjsdhaf','Work motha fucka bitch','Justin','2022-12-22 14:44:22','2022-12-22 15:55:49');
 INSERT INTO `blogs` VALUES (52,'as;ldkfjsadlfkj','asdfasdfsadfsdf','Justin','2022-12-22 14:45:45',NULL);
-/*!40000 ALTER TABLE `blogs` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `blogtags`
---
-
-DROP TABLE IF EXISTS `blogtags`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `blogtags` (
-  `blogid` int NOT NULL,
-  `tagid` int NOT NULL,
-  PRIMARY KEY (`tagid`,`blogid`),
-  KEY `fk_blogid_idx` (`blogid`),
-  CONSTRAINT `fk_blogid` FOREIGN KEY (`blogid`) REFERENCES `blogs` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `fk_tagid` FOREIGN KEY (`tagid`) REFERENCES `tags` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `blogtags`
 --
 
-LOCK TABLES `blogtags` WRITE;
-/*!40000 ALTER TABLE `blogtags` DISABLE KEYS */;
 INSERT INTO `blogtags` VALUES (29,4);
 INSERT INTO `blogtags` VALUES (32,2);
 INSERT INTO `blogtags` VALUES (32,4);
 INSERT INTO `blogtags` VALUES (52,2);
 INSERT INTO `blogtags` VALUES (52,4);
 INSERT INTO `blogtags` VALUES (52,6);
-/*!40000 ALTER TABLE `blogtags` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `tags`
---
-
-DROP TABLE IF EXISTS `tags`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tags` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `tagname` varchar(45) NOT NULL,
-  `_created` datetime DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `tags`
 --
 
-LOCK TABLES `tags` WRITE;
-/*!40000 ALTER TABLE `tags` DISABLE KEYS */;
 INSERT INTO `tags` VALUES (1,'#tech','2022-12-14 14:11:48');
 INSERT INTO `tags` VALUES (2,'#food','2022-12-14 14:11:48');
 INSERT INTO `tags` VALUES (3,'#sports','2022-12-14 14:11:48');
 INSERT INTO `tags` VALUES (4,'#family','2022-12-19 09:50:42');
 INSERT INTO `tags` VALUES (5,'#games','2022-12-19 10:06:28');
 INSERT INTO `tags` VALUES (6,'#AI','2022-12-19 10:10:49');
-/*!40000 ALTER TABLE `tags` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Dumping routines for database 'blogdb'
---
-/*!50003 DROP PROCEDURE IF EXISTS `spBlogsWithTags` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `spBlogsWithTags`()
-BEGIN
- 	select
- 		b.*, authorname, group_concat(tagname) as tags
-     from blogs b
-     left join blogtags bt on b.id = bt.blogid
-	 left join tags t on t.id = bt.tagid
-     left join authors a on a.id = b.authorid
-     
-     group by b.id;
- END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `spBlogTags` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `spBlogTags`(blogid int)
-BEGIN
- 	select
- 		t.tagname,
-         blogtags.blogid
-     from tags t
-     join blogtags on t.id = blogtags.tagid
-     where blogtags.blogid = blogid;
- END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `spBlogWithTags` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `spBlogWithTags`(blogid int)
-BEGIN
- 	select
- 		b.*, authorname, group_concat(tagname) as tags
-     from blogs b
-     left join blogtags bt on b.id = bt.blogid
-	 left join tags t on t.id = bt.tagid
-     left join authors a on a.id = b.authorid
-     where b.id = blogid
-     group by b.id;
- END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -236,4 +72,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-01-02 15:39:12
+-- Dump completed
