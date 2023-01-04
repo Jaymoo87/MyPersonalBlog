@@ -12,6 +12,7 @@ import Home from "./pages/Home";
 import AddNewBlog from "./pages/NewBlog";
 import EditBlog from "./pages/EditBlog";
 import Donate from "./pages/Donate";
+import ContactMe from "./pages/Contact";
 
 const stripe = loadStripe(
   "pk_test_51MJKUdFPaPHS5QypWHjfAUtLgC0N44YatFtaQWDAVXnoudtlxFDbdf1dnib4afNrzotVpUTurvzkaGlbJN1G6v3b00gQVUooKI"
@@ -30,6 +31,7 @@ const App = () => {
             <Route path="/blogs/:id" element={<BlogCard />}></Route>
             <Route path="/blogs/new" element={<AddNewBlog />}></Route>
             <Route path="/blogs/:id/edit" element={<EditBlog />}></Route>
+            <Route path="/contact" element={<ContactMe />}></Route>
             <Route
               path="/donate"
               element={
