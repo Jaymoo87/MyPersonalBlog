@@ -57,6 +57,16 @@ const Navbar = () => {
       >
         Write A New Blog
       </NavLink>
+      <Nav onSelect={handleSelect}>
+        <NavDropdown title="Authors" id="nav-dropdown" className=" text-light btn btn-dark btn-outline-secondary">
+          <NavDropdown.Item className="bg-dark" eventKey="/register">
+            Register
+          </NavDropdown.Item>
+          <NavDropdown.Item className="bg-dark" eventKey="/login">
+            Login
+          </NavDropdown.Item>
+        </NavDropdown>
+      </Nav>
       {/* <NavLink
         to="/donate"
         className={({ isActive }) =>

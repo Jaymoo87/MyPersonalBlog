@@ -1,4 +1,6 @@
 import * as React from "react";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const ContactMe = (props: AppProps) => {
@@ -7,6 +9,7 @@ const ContactMe = (props: AppProps) => {
   const [message, setMessage] = useState<string>("");
 
   const MAX = 400;
+  const nav = useNavigate();
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -15,7 +18,31 @@ const ContactMe = (props: AppProps) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ from, subject, message }),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.ok) {
+          Swal.fire({
+            customClass: "bg-success",
+            backdrop: "#1B4079ab",
+            title: "Quit Playin On My PHONE!",
+            text: "Keep It Real, 100. ",
+            confirmButtonText: "I Heard You",
+          });
+        } else {
+          Swal.fire({
+            backdrop: "#c92711",
+            customClass: "swal-overlay",
+            title: "Fuck!",
+            icon: "error",
+            text: "Didn't wanna hear that shit anyway. Now it's not coming",
+            confirmButtonText: "not cool",
+          });
+          nav("/contact");
+        }
+        nav("/");
+
+        res.json();
+      })
+
       .then((result) => console.log("it worked"));
   };
 
@@ -45,6 +72,10 @@ const ContactMe = (props: AppProps) => {
           </form>
         </div>
       </section>
+      <footer className="d-flex justify-content-center text-center">
+        contact info: iwillseeherlater@yourmom.com<br></br>
+        Address: Your Mom's House
+      </footer>
     </main>
   );
 };
