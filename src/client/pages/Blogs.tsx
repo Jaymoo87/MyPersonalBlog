@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 // import { useParams } from "react-router-dom";
 
 import { Link } from "react-router-dom";
-import { IBlog, IJoinedBlog } from "../../types";
+import { IBlog, IJoinedBlog } from "../../server/types";
 
 const Blogs = () => {
   const [blogs, setBlogs] = useState<IJoinedBlog[]>([]);

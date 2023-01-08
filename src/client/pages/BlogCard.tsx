@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 
-import { IBlog, ITag } from "../../types";
+import { IBlog, ITag } from "../../server/types";
 
 const BlogCard = () => {
   const { id } = useParams();

@@ -5,8 +5,7 @@ import ReactSelect, { MultiValue } from "react-select";
 import makeAnimated from "react-select/animated";
 
 import Swal from "sweetalert2";
-import { ITag } from "../../types";
-import { IJoinedBlog } from "../../types";
+import { IJoinedBlog, ITag } from "../../server/types";
 
 const AddNewBlog = () => {
   const MAX = 5000;

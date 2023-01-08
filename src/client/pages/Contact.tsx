@@ -33,7 +33,7 @@ const ContactMe = (props: AppProps) => {
             customClass: "swal-overlay",
             title: "Fuck!",
             icon: "error",
-            text: "Didn't wanna hear that shit anyway. Now it's not coming",
+            text: "Didn't wanna hear that shit anyway. Now I don't have to.",
             confirmButtonText: "not cool",
           });
           nav("/contact");
