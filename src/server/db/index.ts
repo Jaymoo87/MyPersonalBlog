@@ -3,7 +3,7 @@ import * as mysql from "mysql";
 import config from "../config";
 import blogs from "./queries/blogs";
 import blogtags from "./queries/blogtags";
-import donate from "../routes/donate";
+import donate from "../routes/api/donate";
 import authors from "./queries/authors";
 
 const pool = mysql.createPool(config.mysql);
