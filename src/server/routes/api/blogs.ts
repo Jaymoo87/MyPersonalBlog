@@ -1,5 +1,6 @@
 import * as express from "express";
-import db from "../db";
+import db from "../../db";
+import { tokenCheck } from "../../middlewares/auth.mw";
 
 const blogRouter = express.Router();
 
@@ -32,25 +33,28 @@ blogRouter.get("/:id", async (req, res) => {
   }
 });
 
-blogRouter.delete("/:id", async (req, res) => {
+blogRouter.delete("/:id", tokenCheck, async (req, res) => {
   let id = Number(req.params.id);
+  const authorid = req.user!.userid;
+
   try {
-    res.json(await db.blogs.deleteBlog(id));
+    res.json(await db.blogs.deleteBlog(id, authorid));
   } catch (e) {
     console.log(e);
     res.sendStatus(500);
   }
 });
 
-blogRouter.post("/", async (req, res) => {
+blogRouter.post("/", tokenCheck, async (req, res) => {
   try {
-    const { authorid, content, title, selectedTagsArray } = req.body;
+    const { content, title, selectedTagsArray } = req.body;
+    const authorid = req.user!.userid;
 
-    if (!content || !authorid || !title)
+    if (!content || !title)
       return res.status(400).json({ message: "You forgot your user id and a message... what are you doing???!" });
     const BlogData = await db.blogs.postBlog(authorid, title, content);
 
-    for await (const tagID of selectedTagsArray) {
+    for await (const tagID of selectedTagsArray as number[]) {
       await db.blogtags.postBlogTags(BlogData.insertId, tagID);
     }
 
@@ -61,17 +65,18 @@ blogRouter.post("/", async (req, res) => {
   }
 });
 
-blogRouter.put("/:id", async (req, res) => {
+blogRouter.put("/:id", tokenCheck, async (req, res) => {
   let blogid = Number(req.params.id);
 
-  const { authorid, content, title, tagIDArray } = req.body;
+  const { content, title, tagIDArray } = req.body;
+  const authorid = req.user!.userid;
 
   if (!authorid || !content || !title)
     return res.status(400).json({ message: "Need to know who you are and what you said and a damn title!" });
 
   try {
     const BlogToEdit = { authorid, content, title };
-    await db.blogs.editBlog(BlogToEdit, blogid);
+    await db.blogs.editBlog(BlogToEdit, blogid, authorid);
     await db.blogtags.deleteBlogTags(blogid);
     for await (const tagID of tagIDArray) {
       await db.blogtags.postBlogTags(blogid, tagID);

@@ -9,14 +9,14 @@ import db from "../../db";
 const router = Router();
 
 router.post("/", async (req, res) => {
-  const newUser = req.body;
+  const newAuthor = req.body;
 
   try {
-    newUser.password = generateHash(newUser.password);
-    const result = await db.authors.insert(newUser);
+    newAuthor.password = generateHash(newAuthor.password);
+    const result = await db.authors.insert(newAuthor);
     result.insertID;
     //@ts-ignore
-    const token = jwt.sign({ userid: result.insertID, email: newUser.email, role: 1 }, config.jwt.secret, {
+    const token = jwt.sign({ userid: result.insertID, email: newAuthor.email, role: 1 }, config.jwt.secret, {
       expiresIn: "10d",
     });
     res.json(token);

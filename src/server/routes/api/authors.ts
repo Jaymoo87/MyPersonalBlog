@@ -1,10 +1,9 @@
 import { Router } from "express";
 import { tokenCheck } from "../../middlewares/auth.mw";
-import { ReqAuthor } from "../../types";
 
 const router = Router();
 
-router.get("/", tokenCheck, (req: ReqAuthor, res) => {
+router.get("/", tokenCheck, (req, res) => {
   try {
     res.json({ message: `Logged IN! Enjoy Your Pizza!` });
   } catch (error) {
