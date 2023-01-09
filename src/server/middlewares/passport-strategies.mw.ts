@@ -6,7 +6,7 @@ import config from "../config";
 import db from "../db";
 import { AuthorsTable } from "../db/models";
 import { Payload } from "../types";
-import { application, Application } from "express";
+import { Application } from "express";
 import { compareHash } from "../utils/passwords";
 
 export function configurePassport(app: Application) {
@@ -47,8 +47,9 @@ export function configurePassport(app: Application) {
       },
       (payload: Payload, done) => {
         try {
+          done(null, payload);
         } catch (error) {
-          done;
+          done(error, false);
         }
       }
     )

@@ -1,5 +1,5 @@
 import { Request } from "express";
-import { AuthorsTable as AuthorsTable } from "../db/models";
+import { AuthorsTable } from "../db/models";
 
 export interface IBlog {
   id?: number;
@@ -20,12 +20,14 @@ export interface IJoinedBlog extends IBlog {
   authorname: string;
 }
 
-export interface ReqAuthor extends Request {
-  user?: AuthorsTable;
-}
-
-export interface Payload extends AuthorsTable {
+export interface Payload {
   userid: number;
   email: string;
   role: 1;
+}
+
+declare global {
+  namespace Express {
+    interface User extends Payload {}
+  }
 }

@@ -1,4 +1,5 @@
 import * as passport from "passport";
+
 import { Request, Response, NextFunction } from "express";
 
 export function tokenCheck(req: Request, res: Response, next: NextFunction) {
@@ -13,6 +14,6 @@ export function tokenCheck(req: Request, res: Response, next: NextFunction) {
       return res.status(401).json({ message: "just start over, maybe dont come back}" });
     }
     req.user = user;
+    next();
   })(req, res, next);
-  next();
 }
