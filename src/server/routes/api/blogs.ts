@@ -16,7 +16,7 @@ blogRouter.get("/", async (req, res) => {
     res.json(blogsWithTagArray);
   } catch (e) {
     console.log(e);
-    res.sendStatus(500);
+    res.sendStatus(500).json({ message: "failed to retrieve blogs from server" });
   }
 });
 
@@ -26,10 +26,10 @@ blogRouter.get("/:id", async (req, res) => {
     const blog = (await db.blogs.getOneBlog(id))[0][0];
     blog.tags = blog.tags ? (blog.tags as unknown as string).split(",") : [];
 
-    res.json(blog);
+    res.sendStatus(200).json(blog);
   } catch (e) {
     console.log(e);
-    res.sendStatus(500);
+    res.sendStatus(500).json({ message: "Could Not Retrieve This Blog from the Server" });
   }
 });
 
@@ -38,10 +38,11 @@ blogRouter.delete("/:id", tokenCheck, async (req, res) => {
   const authorid = req.user!.userid;
 
   try {
-    res.json(await db.blogs.deleteBlog(id, authorid));
+    await db.blogs.deleteBlog(id, authorid);
+    res.json({ message: "Blog Deleted" });
   } catch (e) {
     console.log(e);
-    res.sendStatus(500);
+    res.sendStatus(500).json(e.sqlmessage || e.message);
   }
 });
 
@@ -58,10 +59,10 @@ blogRouter.post("/", tokenCheck, async (req, res) => {
       await db.blogtags.postBlogTags(BlogData.insertId, tagID);
     }
 
-    res.status(201).json({ content: "it worked!", id: BlogData.insertId });
+    res.status(201).json({ content: "Blog Posted!", id: BlogData.insertId });
   } catch (e) {
     console.log(e);
-    res.status(500).json({ message: "server side... gotta work on it" });
+    res.status(500).json({ message: "Blog failed to POST on server" });
   }
 });
 
@@ -85,7 +86,7 @@ blogRouter.put("/:id", tokenCheck, async (req, res) => {
     res.status(201).json({ message: "Blog has been updated, try to do it right the first time" });
   } catch (e) {
     console.log(e);
-    res.sendStatus(500);
+    res.sendStatus(500).json({ message: "Server Failed to Update Blog" });
   }
 });
 
