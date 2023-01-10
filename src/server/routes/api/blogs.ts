@@ -73,7 +73,7 @@ blogRouter.put("/:id", tokenCheck, async (req, res) => {
   const authorid = req.user!.userid;
 
   if (!authorid || !content || !title)
-    return res.status(400).json({ message: "Need to know who you are and what you said and a damn title!" });
+    return res.status(400).json({ message: "Need to know who you are, what you said and a damn title!" });
 
   try {
     const BlogToEdit = { authorid, content, title };

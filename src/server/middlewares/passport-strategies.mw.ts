@@ -15,6 +15,7 @@ export function configurePassport(app: Application) {
       delete user.password;
     }
     done(null, user);
+    return;
   });
   passport.deserializeUser((user, done) => done(user, null));
 
@@ -29,11 +30,14 @@ export function configurePassport(app: Application) {
           if (authorFound && compareHash(password, authorFound.password!)) {
             delete authorFound.password;
             done(null, authorFound);
+            return;
           } else {
             done(null, false, { message: "invalid creds... get your fingers right" });
+            return;
           }
         } catch (error) {
           done(error);
+          return;
         }
       }
     )
@@ -47,9 +51,9 @@ export function configurePassport(app: Application) {
       },
       (payload: Payload, done) => {
         try {
-          done(null, payload);
+          return done(null, payload);
         } catch (error) {
-          done(error, false);
+          return done(error, false);
         }
       }
     )
