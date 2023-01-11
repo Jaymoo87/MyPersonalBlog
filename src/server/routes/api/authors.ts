@@ -5,7 +5,7 @@ const router = Router();
 
 router.get("/", tokenCheck, (req, res) => {
   try {
-    res.json({ message: `Logged IN! Enjoy Your Pizza!` });
+    res.json({ message: `Logged IN! Write A Blog!` });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "currently shitting on the server" });

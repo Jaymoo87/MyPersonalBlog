@@ -16,7 +16,7 @@ blogRouter.get("/", async (req, res) => {
     res.json(blogsWithTagArray);
   } catch (e) {
     console.log(e);
-    res.sendStatus(500).json({ message: "failed to retrieve blogs from server" });
+    res.status(500).json({ message: "failed to retrieve blogs from server" });
   }
 });
 
@@ -26,10 +26,10 @@ blogRouter.get("/:id", async (req, res) => {
     const blog = (await db.blogs.getOneBlog(id))[0][0];
     blog.tags = blog.tags ? (blog.tags as unknown as string).split(",") : [];
 
-    res.sendStatus(200).json(blog);
+    res.status(200).json(blog);
   } catch (e) {
     console.log(e);
-    res.sendStatus(500).json({ message: "Could Not Retrieve This Blog from the Server" });
+    res.status(500).json({ message: "Could Not Retrieve This Blog from the Server" });
   }
 });
 
@@ -42,7 +42,7 @@ blogRouter.delete("/:id", tokenCheck, async (req, res) => {
     res.json({ message: "Blog Deleted" });
   } catch (e) {
     console.log(e);
-    res.sendStatus(500).json(e.sqlmessage || e.message);
+    res.status(500).json(e.sqlmessage || e.message);
   }
 });
 
@@ -86,7 +86,7 @@ blogRouter.put("/:id", tokenCheck, async (req, res) => {
     res.status(201).json({ message: "Blog has been updated, try to do it right the first time" });
   } catch (e) {
     console.log(e);
-    res.sendStatus(500).json({ message: "Server Failed to Update Blog" });
+    res.status(500).json({ message: "Server Failed to Update Blog" });
   }
 });
 

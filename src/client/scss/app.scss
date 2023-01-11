@@ -1,5 +1,5 @@
 // First override some or all individual color variables
-$primary: #78290F;
+$primary: #78290f;
 $secondary: #001524;
 $success: #1b4179;
 $info: #13101c;
@@ -8,6 +8,7 @@ $danger: #c92711;
 $light: #f8f9fa;
 $dark: #FF7D00;
 $blogbg: #b9d6e02d;
+$blogcardbg: #8d36193a;
 
 // Then add them to your custom theme-colors map, together with any additional colors you might need
 $theme-colors: (
@@ -19,7 +20,8 @@ $theme-colors: (
 	danger: $danger,
 	light: $light,
 	dark: $dark,
-	blogbg: $blogbg 
+	blogbg: $blogbg,
+	blogcardbg: $blogcardbg 
 	// add any additional color below
 );
 
