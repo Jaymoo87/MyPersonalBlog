@@ -50,7 +50,7 @@ const ContactMe = (props: AppProps) => {
     <main className="container my-5">
       <section className="row justify-content-center">
         <div className="col-md-6">
-          <form action="" className="form-group bg-secondary p-3 border rounded shadow">
+          <form action="" className="form-group bg-secondary p-3 rounded shadow">
             <label className="text-dark ">Email</label>
             <input value={from} onChange={(e) => setFrom(e.target.value)} className="form-control mb-3" />
             <label className="text-dark ">Subject</label>

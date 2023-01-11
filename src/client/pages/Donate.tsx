@@ -60,7 +60,7 @@ const Donate = (props: DonateProps) => {
   return (
     <main className="container d-flex justify-content-center">
       <section className="row mt-5 justify-content-center col-6 col-md-6">
-        <form className="form-group p-4 border border-dark rounded-lg bg-secondary rounded shadow-lg">
+        <form className="form-group p-4 rounded-lg bg-secondary rounded shadow-lg">
           <label className="text-dark ">Name</label>
           <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control mb-2" />
           <label className="text-dark ">Donation Amount</label>
