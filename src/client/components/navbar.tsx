@@ -29,7 +29,7 @@ const Navbar = () => {
         to="/"
         className={({ isActive }) =>
           `nav-link ${
-            isActive ? " mt-2 active btn btn-dark text-light btn-outline-secondary" : "mt-2 btn btn-dark text-light"
+            isActive ? " mt-2 active btn btn-dark text-light btn-outline-secondary" : " mt-2 btn btn-dark text-light"
           }`
         }
       >
@@ -58,11 +58,16 @@ const Navbar = () => {
         Write A New Blog
       </NavLink>
       <Nav onSelect={handleSelect}>
-        <NavDropdown title="Authors" id="nav-dropdown" className=" text-light btn btn-dark btn-outline-secondary">
-          <NavDropdown.Item className="bg-dark" eventKey="/register">
+        <NavDropdown
+          title="Authors"
+          id="nav-dropdown"
+          menuVariant="dark"
+          className=" text-light btn btn-dark btn-outline-secondary"
+        >
+          <NavDropdown.Item className="bg-dark text-primary" eventKey="/register">
             Register
           </NavDropdown.Item>
-          <NavDropdown.Item className="bg-dark" eventKey="/login">
+          <NavDropdown.Item className="bg-dark text-primary" eventKey="/login">
             Login
           </NavDropdown.Item>
         </NavDropdown>
@@ -88,11 +93,16 @@ const Navbar = () => {
         Contact Me
       </NavLink> */}
       <Nav onSelect={handleSelect}>
-        <NavDropdown title="Reach Out" id="nav-dropdown" className=" text-light btn btn-dark btn-outline-secondary">
-          <NavDropdown.Item className="bg-dark" eventKey="/contact">
+        <NavDropdown
+          title="Reach Out"
+          menuVariant="dark"
+          id="nav-dropdown"
+          className=" text-light btn btn-dark btn-outline-secondary"
+        >
+          <NavDropdown.Item className="bg-dark text-primary" eventKey="/contact">
             Contact
           </NavDropdown.Item>
-          <NavDropdown.Item className="bg-dark" eventKey="/donate">
+          <NavDropdown.Item className="bg-dark text-primary" eventKey="/donate">
             Donate
           </NavDropdown.Item>
         </NavDropdown>
