@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiService, TOKEN_KEY } from "../services/api-service";
 import { POST } from "../services/api-service";
+import { SwalError, SwalSuccess } from "../services/swal-error-handler";
 
 /* HOOK REACT EXAMPLE */
 const Login = (props: LoginProps) => {
@@ -13,9 +14,14 @@ const Login = (props: LoginProps) => {
 
   const handleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    POST("/auth/login", { email, password })
-      .then((data) => nav("/blogs"))
-      .catch(() => console.log("oops!"));
+    POST<{ token: string; message: string }>("/auth/login", { email, password })
+      .then((data) => {
+        const token = data?.token;
+        SwalSuccess("Logged In");
+        localStorage.setItem(TOKEN_KEY, token!);
+        nav("/blogs");
+      })
+      .catch(SwalError);
   };
 
   return (

@@ -15,6 +15,7 @@ import Donate from "./pages/Donate";
 import ContactMe from "./pages/Contact";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import PrivateRoute from "./components/PrivateRoute";
 
 const stripe = loadStripe(
   "pk_test_51MJKUdFPaPHS5QypWHjfAUtLgC0N44YatFtaQWDAVXnoudtlxFDbdf1dnib4afNrzotVpUTurvzkaGlbJN1G6v3b00gQVUooKI"
@@ -33,8 +34,10 @@ const App = () => {
             <Route path="/login" element={<Login />}></Route>
             <Route path="/register" element={<Register />}></Route>
             <Route path="/blogs/:id" element={<BlogCard />}></Route>
-            <Route path="/blogs/new" element={<AddNewBlog />}></Route>
-            <Route path="/blogs/:id/edit" element={<EditBlog />}></Route>
+            <Route element={<PrivateRoute />}>
+              <Route path="/blogs/new" element={<AddNewBlog />}></Route>
+              <Route path="/blogs/:id/edit" element={<EditBlog />}></Route>
+            </Route>
             <Route path="/contact" element={<ContactMe />}></Route>
             <Route
               path="/donate"

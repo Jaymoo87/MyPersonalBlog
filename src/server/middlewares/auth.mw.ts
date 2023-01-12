@@ -17,6 +17,6 @@ export function tokenCheck(req: Request, res: Response, next: NextFunction) {
       return;
     }
     req.user = user;
-    next();
+    return next();
   })(req, res, next);
 }

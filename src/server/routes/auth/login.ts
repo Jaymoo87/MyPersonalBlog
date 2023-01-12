@@ -9,8 +9,6 @@ import { tokenCheck } from "../../middlewares/auth.mw";
 
 const router = Router();
 
-router.get("/token_status", tokenCheck, async () => {});
-
 router.post("/", passport.authenticate("local", { session: false }), (req, res) => {
   try {
     //@ts-ignore

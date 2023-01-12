@@ -1,13 +1,14 @@
 import { Link, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 
-import { IBlog, ITag } from "../../server/types";
+import { IBlog, IJoinedBlog, ITag } from "../../server/types";
+import { SwalError } from "../services/swal-error-handler";
 
 const BlogCard = () => {
   const { id } = useParams();
   const blogid = Number(id);
 
-  const [blog, setBlogs] = useState<IBlog>();
+  const [blog, setBlogs] = useState<IJoinedBlog>();
   // const [tags, setTags] = useState<ITag>();
   const [blogTags, setBlogTags] = useState<string[]>([]);
   const [tags, setTags] = useState<ITag[]>([]);
@@ -24,8 +25,7 @@ const BlogCard = () => {
         setBlogs(data);
         setBlogTags(data.tags as string[]);
       })
-
-      .catch((e) => alert(e.message));
+      .catch(SwalError);
   }, [id]);
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const BlogCard = () => {
             className=" p-3 rounded bg-blogbg m-5 card-text "
           ></textarea>
           <div className="d-flex justify-content-end mx-2">
-            <h6 className="  d-flex card-text fst-italic">Author: {blog?.authorid}</h6>
+            <h6 className="  d-flex card-text fst-italic">Author: {blog?.authorname}</h6>
           </div>
           <div className="badge d-flex justify-content-start">
             <Link to="/blogs" className=" m-3 shadow-lg border-radius btn btn-sm btn-dark btn-outline-primary">

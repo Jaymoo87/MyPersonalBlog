@@ -22,7 +22,7 @@ export function SwalError(error: any) {
 export function SwalSuccess(str: string, title: string = "Success!") {
   Swal.fire({
     title,
-    icon: "error",
+    icon: "success",
     text: str,
     position: "top-right",
     toast: true,

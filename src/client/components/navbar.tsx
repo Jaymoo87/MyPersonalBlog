@@ -1,25 +1,26 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { NavLink, useNavigate } from "react-router-dom";
+import path from "path";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import ContactMe from "../pages/Contact";
 
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+
+import ContactMe from "../pages/Contact";
 import Dropdown from "./Dropdown";
+import { GET } from "../services/api-service";
 
 const Navbar = () => {
   const [loggedIn, setLoggedIn] = useState(false);
-  const [dropDown, setDropDown] = useState(false);
-  const navi = useNavigate();
+  const loc = useLocation();
+  // const [dropDown, setDropDown] = useState(false);
+  const nav = useNavigate();
 
   useEffect(() => {
-    fetch("/auth/token_status", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  });
+    GET("/token_status")
+      .then(() => setLoggedIn(true))
+      .catch(() => setLoggedIn(false));
+  }, [loc.pathname]);
 
   // const onMouseEnter = () => {
   //   if (window.innerWidth < 960) {
@@ -32,7 +33,7 @@ const Navbar = () => {
   // const onMouseLeave = () => {
   //   setDropDown(false);
   // };
-  const handleSelect = (eventKey: any) => navi(`${eventKey}`);
+  const handleSelect = (eventKey: any) => nav(`${eventKey}`);
   return (
     <nav className="nav d=flex justify-content-around bg-secondary p-3 text-primary">
       <NavLink
@@ -67,7 +68,7 @@ const Navbar = () => {
       >
         Write A New Blog
       </NavLink>
-      <Nav onSelect={handleSelect}>
+      <Nav onSelect={handleSelect} className="">
         <NavDropdown
           title="Authors"
           id="nav-dropdown"

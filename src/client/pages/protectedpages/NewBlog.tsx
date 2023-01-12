@@ -6,6 +6,7 @@ import makeAnimated from "react-select/animated";
 
 import Swal from "sweetalert2";
 import { IJoinedBlog, ITag } from "../../../server/types";
+import { SwalError } from "../../services/swal-error-handler";
 
 const AddNewBlog = () => {
   const MAX = 5000;
@@ -32,7 +33,8 @@ const AddNewBlog = () => {
       .then((data) => {
         setTags(data);
         setOptions(data.map((t: ITag) => ({ value: t.id!, label: t.tagname })));
-      });
+      })
+      .catch(SwalError);
   }, []);
 
   const newBlog = async () => {

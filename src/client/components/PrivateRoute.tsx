@@ -1,29 +1,31 @@
 import * as React from "react";
+import { useEffect, useState } from "react";
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
 
-import { TOKEN_KEY } from "../services/api-service";
+import { GET, TOKEN_KEY } from "../services/api-service";
 
 /* HOOK REACT EXAMPLE */
-const PrivateRoute = ({ children }: PrivateRouteProps) => {
-  const TOKEN = localStorage.getItem(TOKEN_KEY);
+const PrivateRoute = () => {
   const nav = useNavigate();
+  const [isValid, setIsValid] = useState<boolean>(false);
+  const [hasChecked, setHasChecked] = useState<boolean>(false);
 
-  if (!TOKEN) {
+  useEffect(() => {
+    const TOKEN = localStorage.getItem(TOKEN_KEY);
+
+    GET("/auth/token_status")
+      .then(() => setIsValid(true))
+      .catch(() => setIsValid(false))
+      .finally(() => setHasChecked(true));
+  }, []);
+
+  if (!hasChecked) return <></>;
+
+  if (!isValid) {
     return <Navigate to="/login" />;
   } else {
-    return (
-      <div>
-        {children}
-        {<Outlet />}
-      </div>
-    );
+    return <Outlet />;
   }
 };
-
-interface PrivateRouteProps {
-  path: string;
-  exact?: boolean;
-  children: React.ReactNode;
-}
 
 export default PrivateRoute;

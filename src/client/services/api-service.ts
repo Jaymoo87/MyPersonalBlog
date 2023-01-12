@@ -2,21 +2,21 @@ export const TOKEN_KEY = "token";
 
 type methods = "GET" | "POST" | "PUT" | "DELETE";
 
-export function POST(url: string, data: any) {
-  return apiService(url, "POST", data);
+export function POST<T>(url: string, data: any) {
+  return apiService<T>(url, "POST", data);
 }
 
-export function PUT(url: string, data: any) {
-  return apiService(url, "PUT", data);
+export function PUT<T>(url: string, data: any) {
+  return apiService<T>(url, "PUT", data);
 }
-export function DELETE(url: string, data: any) {
-  return apiService(url, "DELETE", data);
+export function DELETE<T>(url: string, data: any) {
+  return apiService<T>(url, "DELETE", data);
 }
-export function GET(url: string, data: any) {
-  return apiService(url, "GET", data);
+export function GET<T>(url: string, data?: any) {
+  return apiService<T>(url, "GET", data);
 }
 
-export async function apiService<T = any>(uri: string, method: methods = "GET", data?: any) {
+export async function apiService<T = any>(url: string, method: methods = "GET", data?: any) {
   const TOKEN = localStorage.getItem(TOKEN_KEY);
 
   const headers: HeadersInit = {
@@ -35,7 +35,7 @@ export async function apiService<T = any>(uri: string, method: methods = "GET", 
     delete fetchOptions.body;
   }
   try {
-    const res = await fetch(uri, fetchOptions);
+    const res = await fetch(url, fetchOptions);
 
     if (res.status === 400) {
       throw new Error("check fetch options for any errors");
