@@ -2,7 +2,7 @@ import e from "express";
 import * as React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { apiService, TOKEN_KEY } from "../services/api-service";
+import { apiService, POST, TOKEN_KEY } from "../services/api-service";
 
 /* HOOK REACT EXAMPLE */
 const Register = (props: RegisterProps) => {
@@ -13,7 +13,7 @@ const Register = (props: RegisterProps) => {
 
   const handleRegistration = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    apiService("/auth/register", "POST", { authorname, email, password })
+    POST("/auth/register", { authorname, email, password })
       .then((data) => {
         localStorage.setItem(TOKEN_KEY, data.token);
         nav("/login");

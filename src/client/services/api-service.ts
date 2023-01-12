@@ -1,6 +1,22 @@
 export const TOKEN_KEY = "token";
 
-export async function apiService<T = any>(uri: string, method: string = "GET", data?: any) {
+type methods = "GET" | "POST" | "PUT" | "DELETE";
+
+export function POST(url: string, data: any) {
+  return apiService(url, "POST", data);
+}
+
+export function PUT(url: string, data: any) {
+  return apiService(url, "PUT", data);
+}
+export function DELETE(url: string, data: any) {
+  return apiService(url, "DELETE", data);
+}
+export function GET(url: string, data: any) {
+  return apiService(url, "GET", data);
+}
+
+export async function apiService<T = any>(uri: string, method: methods = "GET", data?: any) {
   const TOKEN = localStorage.getItem(TOKEN_KEY);
 
   const headers: HeadersInit = {

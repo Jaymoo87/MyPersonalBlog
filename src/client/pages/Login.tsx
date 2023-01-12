@@ -3,7 +3,7 @@ import * as React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiService, TOKEN_KEY } from "../services/api-service";
-import { POST } from "../services/fetch-service";
+import { POST } from "../services/api-service";
 
 /* HOOK REACT EXAMPLE */
 const Login = (props: LoginProps) => {
