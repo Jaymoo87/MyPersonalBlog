@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
 import { IBlog, IJoinedBlog } from "../../server/types";
-import SwalError from "../services/swal-error-handler";
+import { SwalError } from "../services/swal-error-handler";
 
 const Blogs = () => {
   const [blogs, setBlogs] = useState<IJoinedBlog[]>([]);
