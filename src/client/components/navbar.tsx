@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { NavLink, useNavigate } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
@@ -8,8 +8,18 @@ import ContactMe from "../pages/Contact";
 import Dropdown from "./Dropdown";
 
 const Navbar = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
   const [dropDown, setDropDown] = useState(false);
   const navi = useNavigate();
+
+  useEffect(() => {
+    fetch("/auth/token_status", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  });
 
   // const onMouseEnter = () => {
   //   if (window.innerWidth < 960) {
