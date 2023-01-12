@@ -6,19 +6,17 @@ import makeAnimated from "react-select/animated";
 
 import Swal from "sweetalert2";
 import { IBlog, IJoinedBlog, ITag } from "../../../server/types";
-import { GET } from "../../services/api-service";
+import { DELETE, GET, PUT } from "../../services/api-service";
+import { SwalError, SwalSuccess } from "../../services/swal-error-handler";
 
 type MultiValueSelect = MultiValue<{ value: number; label: string }>;
 
 const EditBlog = () => {
   const nav = useNavigate();
-  const backToBlogs = () => {
-    nav("/blogs");
-  };
 
   const MAX = 5000;
   const { id } = useParams();
-  const [authorid, setAuthorid] = useState<string | number>("");
+  const [authorid, setAuthorid] = useState<number>();
   const [authorname, setAuthourName] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
@@ -43,7 +41,7 @@ const EditBlog = () => {
         setAuthourName(data.authorname);
         setBlogTags(data.tags as string[]);
       })
-      .catch(console.error);
+      .catch((error) => SwalError(error));
   }, []);
 
   useEffect(() => {
@@ -61,6 +59,13 @@ const EditBlog = () => {
 
   const handleDeleteBlog = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    const tagIDArray = selectedTagIds.map((st) => st.value);
+    const blog = {
+      tagIDArray,
+      authorid,
+      title,
+      content,
+    };
     Swal.fire({
       backdrop: `#5cbecf6e`,
       imageUrl:
@@ -78,26 +83,13 @@ const EditBlog = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`/api/blogs/${id}`, { method: "DELETE" }).then((res) => {
-          if (!res.ok) {
-            Swal.fire({
-              title: "Fuck!",
-              icon: "error",
-              text: "blog not Deleted! Fail.",
-              confirmButtonText: "not cool",
-            });
-          } else {
-            Swal.fire({
-              backdrop: `#5cbecf6e`,
-              imageUrl:
-                "https://media1.giphy.com/media/5PiIuCHlkQ58Y/giphy.gif?cid=ecf05e47pb9pnypw8a44td6ky0o63ezynrfiueg4maf1ulqe&rid=giphy.gif&ct=g",
-              imageWidth: 400,
-              imageHeight: 200,
-              color: "#13101c",
-              text: "Thanks For Wasting Everyone's Time",
-            }).then(() => nav("/blogs"));
-          }
-        });
+        try {
+          DELETE(`/api/blogs/${id}`, blog);
+          SwalSuccess("Deleted!");
+          nav("/blogs");
+        } catch (error) {
+          SwalError(error);
+        }
       }
     });
   };
@@ -110,29 +102,12 @@ const EditBlog = () => {
       title,
       content,
     };
-
-    let res = await fetch(`/api/blogs/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(blog),
-    });
-    if (res.ok) {
-      Swal.fire({
-        title: "Success!",
-        icon: "success",
-        text: "Your Blog Has Been Updated",
-        confirmButtonText: "Do It Right The First Time!",
-      });
-      backToBlogs();
-    } else {
-      Swal.fire({
-        title: "Fuck!",
-        icon: "error",
-        text: "blog not posted! Fail.",
-        confirmButtonText: "not cool",
-      });
+    try {
+      await PUT(`/api/blogs/${id}`, blog);
+      SwalSuccess("Success");
+      nav("/blogs");
+    } catch (error) {
+      SwalError(error);
     }
   };
 

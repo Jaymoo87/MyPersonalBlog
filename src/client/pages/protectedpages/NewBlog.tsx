@@ -6,7 +6,8 @@ import makeAnimated from "react-select/animated";
 
 import Swal from "sweetalert2";
 import { IJoinedBlog, ITag } from "../../../server/types";
-import { SwalError } from "../../services/swal-error-handler";
+import { POST } from "../../services/api-service";
+import { SwalError, SwalSuccess } from "../../services/swal-error-handler";
 
 const AddNewBlog = () => {
   const MAX = 5000;
@@ -34,7 +35,7 @@ const AddNewBlog = () => {
         setTags(data);
         setOptions(data.map((t: ITag) => ({ value: t.id!, label: t.tagname })));
       })
-      .catch(SwalError);
+      .catch((error) => SwalError(error));
   }, []);
 
   const newBlog = async () => {
@@ -46,28 +47,12 @@ const AddNewBlog = () => {
       title,
       content,
     };
-
-    let res = await fetch(`/api/blogs`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(blog),
-    });
-    if (res.ok) {
-      Swal.fire({
-        title: "Success!",
-        text: "Your Blog Has Been Submitted",
-        confirmButtonText: "Cool",
-      });
-      backToBlogs();
-    } else {
-      Swal.fire({
-        title: "Fuck!",
-        icon: "error",
-        text: "blog not posted! Fail.",
-        confirmButtonText: "not cool",
-      });
+    try {
+      POST("/api/blogs", blog);
+      SwalSuccess("New Blog Posted!");
+      nav("/blogs");
+    } catch (error) {
+      SwalError(error);
     }
   };
 
