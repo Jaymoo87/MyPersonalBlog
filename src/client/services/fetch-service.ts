@@ -16,26 +16,26 @@ export function GET(url: string, data: any) {
   return fetcher(url, "GET", data);
 }
 
-async function fetcher(url: string, method: methods = "GET", data?: any) {
+export async function fetcher(url: string, method: methods = "GET", data?: any) {
   return new Promise(async (resolve, reject) => {
     const token = localStorage.getItem(TOKEN_KEY);
 
-    const options = {
+    const options: { method: methods; headers: { [headerZ: string]: string }; body?: any | undefined } = {
       method,
       headers: {},
     };
 
     if (token) {
-      options["headers"]["Authorization"] = `Bearer ${token}`;
+      options.headers.Authorization = `Bearer ${token}`;
     }
 
     if (method === "POST" || method === "PUT") {
-      options["headers"]["Content-Type"] = "application/json";
-      options["body"] = JSON.stringify(data);
+      options.headers["Content-Type"] = "application/json";
+      options.body = JSON.stringify(data);
     }
     if (method === "GET") {
-      delete options["headers"]["Content-Type"];
-      delete options["body"];
+      delete options.headers["Content-Type"];
+      delete options.body;
     }
     try {
       const res = await fetch(url, options);

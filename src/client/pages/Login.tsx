@@ -3,6 +3,7 @@ import * as React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiService, TOKEN_KEY } from "../services/api-service";
+import { POST } from "../services/fetch-service";
 
 /* HOOK REACT EXAMPLE */
 const Login = (props: LoginProps) => {
@@ -12,11 +13,8 @@ const Login = (props: LoginProps) => {
 
   const handleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    apiService("/auth/login", "POST", { email, password })
-      .then((data) => {
-        localStorage.setItem(TOKEN_KEY, data.token);
-        nav("/blogs");
-      })
+    POST("/auth/login", { email, password })
+      .then((data) => nav("/blogs"))
       .catch(() => console.log("oops!"));
   };
 

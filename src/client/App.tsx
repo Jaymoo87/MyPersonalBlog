@@ -14,6 +14,7 @@ import EditBlog from "./pages/protectedpages/EditBlog";
 import Donate from "./pages/Donate";
 import ContactMe from "./pages/Contact";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 const stripe = loadStripe(
   "pk_test_51MJKUdFPaPHS5QypWHjfAUtLgC0N44YatFtaQWDAVXnoudtlxFDbdf1dnib4afNrzotVpUTurvzkaGlbJN1G6v3b00gQVUooKI"
@@ -30,7 +31,7 @@ const App = () => {
             <Route path="" element={<Home />}></Route>
             <Route path="/blogs" element={<Blogs />}></Route>
             <Route path="/login" element={<Login />}></Route>
-            <Route path="/register" element={<h1>Register</h1>}></Route>
+            <Route path="/register" element={<Register />}></Route>
             <Route path="/blogs/:id" element={<BlogCard />}></Route>
             <Route path="/blogs/new" element={<AddNewBlog />}></Route>
             <Route path="/blogs/:id/edit" element={<EditBlog />}></Route>

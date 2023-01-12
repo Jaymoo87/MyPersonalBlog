@@ -24,34 +24,42 @@ const Register = (props: RegisterProps) => {
   return (
     <main className="container">
       <section className="mt-4 row justify-content-center">
-        <div className=" col-12 col-md-4">
-          <form action="" className="form-group border rounded shadow p-4">
-            <h1 className="text-center">Log In</h1>
-            <label htmlFor="email">Author Name:</label>
+        <div className=" col-12 col-md-6">
+          <form action="" className="form-group p-4 rounded-lg bg-secondary rounded shadow-lg">
+            <h1 className="text-center text-dark">Register</h1>
+            <label htmlFor="text" className="text-dark">
+              Author Name:
+            </label>
             <input
               type="text"
               className="form-control mb-2"
               value={authorname}
               onChange={(e) => setAuthorname(e.target.value)}
             />
-            <label htmlFor="email">Email:</label>
+            <label htmlFor="email" className="text-dark">
+              Email:
+            </label>
             <input
               type="email"
               className="form-control mb-2"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <label htmlFor="password">Password:</label>
+            <label htmlFor="password" className="text-dark">
+              Password:
+            </label>
             <input
               autoComplete="current-password"
               type="password"
               className="form-control mb-2"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-            />
-            <button onClick={handleRegistration} className="btn btn-primary">
-              Register
-            </button>
+            />{" "}
+            <div className="d-flex justify-content-end">
+              <button onClick={handleRegistration} className="btn btn-dark">
+                Register
+              </button>
+            </div>
           </form>
         </div>
       </section>

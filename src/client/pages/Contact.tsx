@@ -66,9 +66,11 @@ const ContactMe = (props: AppProps) => {
             <span className="d-flex text-dark justify-content-end">
               {message.length}/{MAX}
             </span>
-            <button onClick={handleSubmit} className="btn btn-info">
-              Hit Me Up
-            </button>
+            <div className="d-flex justify-content-center">
+              <button onClick={handleSubmit} className="btn btn-lg btn-dark btn-outline-secondary">
+                Hit Me Up
+              </button>
+            </div>
           </form>
         </div>
       </section>
