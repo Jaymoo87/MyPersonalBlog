@@ -16,9 +16,9 @@ const Login = (props: LoginProps) => {
     e.preventDefault();
     POST<{ token: string; message: string }>("/auth/login", { email, password })
       .then((data) => {
-        const token = data?.token;
+        const token = data!.token;
         SwalSuccess("Logged In");
-        localStorage.setItem(TOKEN_KEY, token!);
+        localStorage.setItem(TOKEN_KEY, token);
         nav("/blogs");
       })
       .catch(SwalError);

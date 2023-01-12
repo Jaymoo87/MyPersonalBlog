@@ -16,8 +16,8 @@ const Register = (props: RegisterProps) => {
     e.preventDefault();
     POST<{ token: string; message: string }>("/auth/register", { authorname, email, password })
       .then((data) => {
-        const token = data?.token;
-        localStorage.setItem(TOKEN_KEY, token!);
+        const token = data!.token;
+        localStorage.setItem(TOKEN_KEY, token);
         nav("/login");
       })
       .catch(SwalError);
