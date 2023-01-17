@@ -19,7 +19,7 @@ router.post("/", async (req, res) => {
     const token = jwt.sign({ userid: result.insertID, email: newAuthor.email, role: 1 }, config.jwt.secret, {
       expiresIn: "10d",
     });
-    res.json(token);
+    res.json({ token });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "suck it up, fuck it up" });

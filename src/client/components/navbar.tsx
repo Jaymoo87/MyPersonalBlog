@@ -17,7 +17,7 @@ const Navbar = () => {
   const nav = useNavigate();
 
   useEffect(() => {
-    GET("/token_status")
+    GET("/auth/token_status")
       .then(() => setLoggedIn(true))
       .catch(() => setLoggedIn(false));
   }, [loc.pathname]);
