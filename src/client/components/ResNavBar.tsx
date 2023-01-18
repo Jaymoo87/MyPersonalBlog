@@ -17,36 +17,35 @@ const ResNavBar = () => {
       .catch(() => setLoggedIn(false));
   }, [loc.pathname]);
 
-  const handleSelect = (eventKey: any) => nav(`${eventKey}`);
-
   return (
     <>
       <Navbar collapseOnSelect fixed="top" expand="sm" bg="secondary" variant="dark">
         <Container>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-center">
+          <Navbar.Collapse id="responsive-navbar-nav" className="d-flex justify-content-center">
             <Nav>
-              <Nav.Link className="text-dark" href="/">
+              <Nav.Link className="mx-5 text-dark" href="/">
                 Home
               </Nav.Link>
-              <Nav.Link className="text-dark" href="/blogs">
+              <Nav.Link className="mx-5 text-dark" href="/blogs">
                 Blogs
               </Nav.Link>
-              <Nav.Link className="text-dark" href="/blogs/new">
+              <Nav.Link className="mx-5 text-dark" href="/blogs/new">
                 Write A New Blog
               </Nav.Link>
-              <Nav className="me-auto text-dark justify-content-end">
-                <NavDropdown title="Authors" id="basic-nav-dropdown" menuVariant="dark">
+              <Nav color="dark" className="mx-5 text-dark justify-content-end">
+                <NavDropdown title={<span className="text-dark">Authors</span>} menuVariant="dark">
                   <NavDropdown.Item className="bg-dark text-primary" href="/register">
                     Register
                   </NavDropdown.Item>
+
                   <NavDropdown.Item className="bg-dark text-primary" href="/login">
                     Login
                   </NavDropdown.Item>
                 </NavDropdown>
               </Nav>
-              <Nav className="me-auto">
-                <NavDropdown className="text-dark" title="Reach Out" id="basic-nav-dropdown" menuVariant="dark">
+              <Nav className="mx-5 text-dark">
+                <NavDropdown title={<span className="text-dark">Reach Out</span>} menuVariant="dark">
                   <NavDropdown.Item className="bg-dark text-primary" href="/contact">
                     Contact
                   </NavDropdown.Item>

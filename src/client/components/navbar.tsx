@@ -10,7 +10,7 @@ import ContactMe from "../pages/Contact";
 import Dropdown from "./Dropdown";
 import { GET } from "../services/api-service";
 
-const Navbar = () => {
+const BlogNavbar = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const loc = useLocation();
   // const [dropDown, setDropDown] = useState(false);
@@ -130,4 +130,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default BlogNavbar;

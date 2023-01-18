@@ -36,13 +36,18 @@ blogRouter.get("/:id", async (req, res) => {
 blogRouter.delete("/:id", tokenCheck, async (req, res) => {
   let id = Number(req.params.id);
   const authorid = req.user!.userid;
+  const dbRes = await db.blogs.deleteBlog(id, authorid);
 
-  try {
-    await db.blogs.deleteBlog(id, authorid);
-    res.json({ message: "Blog Deleted" });
-  } catch (e) {
-    console.log(e);
-    res.status(500).json(e.sqlmessage || e.message);
+  if (dbRes.affectedRows === 0) {
+    res.status(401).json({ message: "Already deleted or you can't delete it. Mind ya business!" });
+  } else {
+    try {
+      await db.blogs.deleteBlog(id, authorid);
+      res.json({ message: "Blog Deleted" });
+    } catch (e) {
+      console.log(e);
+      res.status(500).json(e.sqlmessage || e.message);
+    }
   }
 });
 
