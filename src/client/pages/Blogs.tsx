@@ -20,7 +20,7 @@ const Blogs = () => {
     <div className="container">
       <div className="row">
         {blogs.map((blog) => (
-          <div key={`blog-card-${blog.id}`} className="d-flex col-4  mt-4">
+          <div key={`blog-card-${blog.id}`} className="d-flex col-lg-4 col-md-6  mt-4 col-sm-12">
             <div className="mb-2 card align-items-stretch shadow-lg bg-primary border border-dark">
               <img
                 className=" rounded-pill p-1"

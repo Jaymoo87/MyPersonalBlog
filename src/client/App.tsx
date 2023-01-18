@@ -5,7 +5,7 @@ import Select from "react-select";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 
-import Navbar from "./components/navbar";
+import BlogNavBar from "./components/navbar";
 import BlogCard from "./pages/BlogCard";
 import Blogs from "./pages/Blogs";
 import Home from "./pages/Home";
@@ -25,7 +25,7 @@ const stripe = loadStripe(
 const App = () => {
   return (
     <BrowserRouter>
-      <Navbar />
+      <BlogNavBar />
       <main className="container mt-5">
         <section className="row justify-content-center">
           <Routes>

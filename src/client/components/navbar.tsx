@@ -35,7 +35,7 @@ const Navbar = () => {
   // };
   const handleSelect = (eventKey: any) => nav(`${eventKey}`);
   return (
-    <nav className="nav d=flex justify-content-around bg-secondary p-3 text-primary">
+    <Nav className="nav d-flex justify-content-around bg-secondary p-3 text-primary">
       <NavLink
         to="/"
         className={({ isActive }) =>
@@ -126,7 +126,7 @@ const Navbar = () => {
           {dropDown && <Dropdown />}
         </li>
       </ul> */}
-    </nav>
+    </Nav>
   );
 };
 
