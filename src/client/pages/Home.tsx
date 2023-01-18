@@ -4,10 +4,12 @@ import React from "react";
 const Home = () => {
   return (
     <div>
-      <h1 className="fw-bold rounded p-3 bg-blogbg text-center col-lg-12 col-md-8 col-sm-12">The Bloggiest of Blogs</h1>
       <div className="col-lg-12 col-md-8 col-sm-12 mt-3">
         <div className=" bg-warning rounded border border-dark card shadow-lg">
           <div className="row card-body p-3 m-4">
+            <h1 className="fw-bold rounded p-3 mr-4 bg-blogbg text-center col-lg-12 col-md-8 col-sm-12">
+              The Bloggiest of Blogs
+            </h1>
             <img
               className="rounded p-5"
               style={{ aspectRatio: 1 / 1, height: "fit-content", width: "fit-content" }}

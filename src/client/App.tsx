@@ -16,6 +16,7 @@ import ContactMe from "./pages/Contact";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import PrivateRoute from "./components/PrivateRoute";
+import ResNavBar from "./components/ResNavBar";
 
 const stripe = loadStripe(
   "pk_test_51MJKUdFPaPHS5QypWHjfAUtLgC0N44YatFtaQWDAVXnoudtlxFDbdf1dnib4afNrzotVpUTurvzkaGlbJN1G6v3b00gQVUooKI"
@@ -25,7 +26,7 @@ const stripe = loadStripe(
 const App = () => {
   return (
     <BrowserRouter>
-      <BlogNavBar />
+      <ResNavBar />
       <main className="container mt-5">
         <section className="row justify-content-center">
           <Routes>
