@@ -5,7 +5,7 @@ import { Nav, NavDropdown, Navbar, Container } from "react-bootstrap";
 
 import { GET } from "../services/api-service";
 
-const ResNavBar = () => {
+const ResNavBar = (props: any) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const loc = useLocation();
   // const [dropDown, setDropDown] = useState(false);
@@ -16,6 +16,13 @@ const ResNavBar = () => {
       .then(() => setLoggedIn(true))
       .catch(() => setLoggedIn(false));
   }, [loc.pathname]);
+
+  const handleLogOut = (e: React.MouseEvent<HTMLElement>) => {
+    if (loggedIn) {
+      setLoggedIn(false);
+      localStorage.clear();
+    }
+  };
 
   return (
     <>
@@ -34,15 +41,23 @@ const ResNavBar = () => {
                 Write A New Blog
               </Nav.Link>
               <Nav color="dark" className="mx-3 text-dark ">
-                <NavDropdown title={<span className="text-dark">Authors</span>} menuVariant="dark">
-                  <NavDropdown.Item className="bg-dark text-primary" href="/register">
-                    Register
-                  </NavDropdown.Item>
+                {loggedIn ? (
+                  <NavDropdown title={<span className="text-dark">Authors</span>} menuVariant="dark">
+                    <NavDropdown.Item className="bg-dark text-primary" href="/login">
+                      Log out
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                ) : (
+                  <NavDropdown title={<span className="text-dark">Authors</span>} menuVariant="dark">
+                    <NavDropdown.Item className="bg-dark text-primary" href="/register">
+                      Register
+                    </NavDropdown.Item>
 
-                  <NavDropdown.Item className="bg-dark text-primary" href="/login">
-                    Login
-                  </NavDropdown.Item>
-                </NavDropdown>
+                    <NavDropdown.Item className="bg-dark text-primary" href="/login" onClick={(e) => handleLogOut}>
+                      Login
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                )}
               </Nav>
               <Nav className="mx-3 text-dark">
                 <NavDropdown title={<span className="text-dark">Reach Out</span>} menuVariant="dark">
