@@ -1,3 +1,5 @@
+// not used! just another example of a api fetch service
+
 import { TOKEN_KEY } from "./api-service";
 
 type methods = "GET" | "POST" | "PUT" | "DELETE";

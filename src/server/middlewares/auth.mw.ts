@@ -5,7 +5,7 @@ import { Request, Response, NextFunction } from "express";
 export function tokenCheck(req: Request, res: Response, next: NextFunction) {
   passport.authenticate("jwt", (err, user, info) => {
     if (err) {
-      next(err);
+      res.status(401).json({ message: "Invalid Credential Authentication" });
       return;
     }
     if (info) {

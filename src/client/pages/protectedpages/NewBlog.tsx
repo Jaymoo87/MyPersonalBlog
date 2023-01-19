@@ -57,7 +57,7 @@ const AddNewBlog = () => {
   };
 
   return (
-    <div className="mt-4 container rounded col-8 bg-secondary">
+    <div className="mt-4 container rounded col-md-8 col-sm-12 bg-secondary">
       <div className="form-group">
         <label className="text-dark">Author</label>
         <input

@@ -9,6 +9,7 @@ const BlogCard = () => {
   const blogid = Number(id);
 
   const [blog, setBlogs] = useState<IJoinedBlog>();
+  const [author, setauthor] = useState<IJoinedBlog>();
   // const [tags, setTags] = useState<ITag>();
   const [blogTags, setBlogTags] = useState<string[]>([]);
   const [tags, setTags] = useState<ITag[]>([]);
@@ -62,12 +63,14 @@ const BlogCard = () => {
             <Link to="/blogs" className=" m-3 shadow-lg border-radius btn btn-sm btn-dark btn-outline-primary">
               Go Back
             </Link>
+            {/* {blog?.authorid === author?.id && ( */}
             <Link
               to={`/blogs/${id}/edit`}
               className=" m-3 shadow-lg border-radius btn btn-sm btn-dark btn-outline-primary"
             >
               Edit Blog
             </Link>
+            {/*  )} */}
           </div>
         </div>
       </div>

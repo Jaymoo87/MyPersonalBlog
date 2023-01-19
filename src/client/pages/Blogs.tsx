@@ -3,16 +3,16 @@ import React, { useState, useEffect } from "react";
 // import { useParams } from "react-router-dom";
 
 import { Link } from "react-router-dom";
-import { IBlog, IJoinedBlog } from "../../server/types";
+import { IJoinedBlog } from "../../server/types";
+import { GET } from "../services/api-service";
 import { SwalError } from "../services/swal-error-handler";
 
 const Blogs = () => {
   const [blogs, setBlogs] = useState<IJoinedBlog[]>([]);
 
   useEffect(() => {
-    fetch("/api/blogs")
-      .then((res) => res.json())
-      .then((data) => setBlogs(data))
+    GET("/api/blogs")
+      .then((data) => setBlogs(data as IJoinedBlog[]))
       .catch(SwalError);
   }, []);
 
