@@ -6,7 +6,7 @@ import makeAnimated from "react-select/animated";
 
 import Swal from "sweetalert2";
 import { IBlog, IJoinedBlog, ITag } from "../../../server/types";
-import { DELETE, GET, PUT } from "../../services/api-service";
+import { DELETE, GET, PUT, TOKEN_KEY } from "../../services/api-service";
 import { SwalError, SwalSuccess } from "../../services/swal-error-handler";
 
 type MultiValueSelect = MultiValue<{ value: number; label: string }>;
@@ -16,6 +16,10 @@ const EditBlog = () => {
 
   const MAX = 5000;
   const { id } = useParams();
+
+  const token = localStorage.getItem(TOKEN_KEY);
+  let userId = null;
+
   const [authorid, setAuthorid] = useState<number>();
   const [authorname, setAuthourName] = useState<string>("");
   const [title, setTitle] = useState<string>("");
@@ -24,6 +28,22 @@ const EditBlog = () => {
   const [selectedTagIds, setSelectedTagIDs] = useState<MultiValueSelect>([]);
   const [blogTags, setBlogTags] = useState<string[]>([]);
   const [options, setOptions] = useState<MultiValueSelect>();
+
+  if (token) {
+    const [header, payload, signature] = token.split(".");
+    const decoded = atob(payload);
+    const { userid } = JSON.parse(decoded);
+    userId = userid;
+  }
+
+  useEffect(() => {
+    if (authorid) {
+      if (authorid !== userId) {
+        SwalError(new Error("Get Back Bitch, This Ain't Your Shit!"));
+        nav(`blogs/${id}`);
+      }
+    }
+  }, [authorid]);
 
   useEffect(() => {
     fetch(`/api/tags`)
@@ -156,18 +176,22 @@ const EditBlog = () => {
       <span className="d-flex justify-content-end text-light mx-3">
         {content.length}/{MAX}
       </span>
-      <div className="d-flex justify-content-start">
-        <button value="Submit Blog" className=" m-3 btn btn-dark rounded btn-outline-info " onClick={handleClick}>
-          Submit Edit
-        </button>
-        <button
-          value="Submit Blog"
-          className=" m-3 btn btn-danger rounded btn-outline-info "
-          onClick={handleDeleteBlog}
-        >
-          Delete Blog
-        </button>
-      </div>
+      {authorid === userId ? (
+        <div className="d-flex justify-content-start">
+          <button value="Submit Blog" className=" m-3 btn btn-dark rounded btn-outline-info " onClick={handleClick}>
+            Submit Edit
+          </button>
+          <button
+            value="Submit Blog"
+            className=" m-3 btn btn-danger rounded btn-outline-info "
+            onClick={handleDeleteBlog}
+          >
+            Delete Blog
+          </button>
+        </div>
+      ) : (
+        <button>Stop, You Suck, This Isn't Yours!</button>
+      )}
     </div>
   );
 };
