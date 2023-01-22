@@ -3,14 +3,24 @@ import React, { useEffect, useState } from "react";
 
 import { IBlog, IJoinedBlog, ITag } from "../../server/types";
 import { SwalError } from "../services/swal-error-handler";
+import { TOKEN_KEY } from "../services/api-service";
 
 const BlogCard = () => {
   const { id } = useParams();
   const blogid = Number(id);
 
+  const token = localStorage.getItem(TOKEN_KEY);
+  let userId = null;
+
+  if (token) {
+    const [header, payload, signature] = token.split(".");
+    const decoded = atob(payload);
+    const { userid } = JSON.parse(decoded);
+    userId = userid;
+  }
+
   const [blog, setBlogs] = useState<IJoinedBlog>();
   const [author, setauthor] = useState<IJoinedBlog>();
-  // const [tags, setTags] = useState<ITag>();
   const [blogTags, setBlogTags] = useState<string[]>([]);
   const [tags, setTags] = useState<ITag[]>([]);
   const [selectedTagId, setSelectedTagID] = useState<number>(0);
@@ -63,14 +73,14 @@ const BlogCard = () => {
             <Link to="/blogs" className=" m-3 shadow-lg border-radius btn btn-sm btn-dark btn-outline-primary">
               Go Back
             </Link>
-            {/* {blog?.authorid === author?.id && ( */}
-            <Link
-              to={`/blogs/${id}/edit`}
-              className=" m-3 shadow-lg border-radius btn btn-sm btn-dark btn-outline-primary"
-            >
-              Edit Blog
-            </Link>
-            {/*  )} */}
+            {blog?.authorid === userId && (
+              <Link
+                to={`/blogs/${id}/edit`}
+                className=" m-3 shadow-lg border-radius btn btn-sm btn-dark btn-outline-primary"
+              >
+                Edit Blog
+              </Link>
+            )}
           </div>
         </div>
       </div>
