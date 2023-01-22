@@ -1,12 +1,11 @@
-import e from "express";
 import React, { useEffect, useState } from "react";
-import { json, Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ReactSelect, { MultiValue } from "react-select";
 import makeAnimated from "react-select/animated";
 
 import Swal from "sweetalert2";
-import { IBlog, IJoinedBlog, ITag } from "../../../server/types";
-import { DELETE, GET, PUT, TOKEN_KEY } from "../../services/api-service";
+import { IJoinedBlog, ITag } from "../../../server/types";
+import { DELETE, PUT, TOKEN_KEY } from "../../services/api-service";
 import { SwalError, SwalSuccess } from "../../services/swal-error-handler";
 
 type MultiValueSelect = MultiValue<{ value: number; label: string }>;
