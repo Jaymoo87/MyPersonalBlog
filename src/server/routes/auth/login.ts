@@ -15,7 +15,7 @@ router.post("/", passport.authenticate("local", { session: false }), (req, res) 
     const token = jwt.sign({ userid: req.user.id, email: req.user.email, role: 1 }, config.jwt.secret, {
       expiresIn: "10d",
     });
-    res.json({ token });
+    res.json(token);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "suck it up, fuck it up" });

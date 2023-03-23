@@ -17,7 +17,7 @@ const EditBlog = () => {
   const { id } = useParams();
 
   const token = localStorage.getItem(TOKEN_KEY);
-  let userId = null;
+  let userId: any = null;
 
   const [authorid, setAuthorid] = useState<number>();
   const [authorname, setAuthourName] = useState<string>("");
@@ -39,7 +39,7 @@ const EditBlog = () => {
     if (authorid) {
       if (authorid !== userId) {
         SwalError(new Error("Get Back Bitch, This Ain't Your Shit!"));
-        nav(`blogs/${id}`);
+        nav(`/blogs/${id}`);
       }
     }
   }, [authorid]);

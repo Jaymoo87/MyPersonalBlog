@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { apiService, POST, TOKEN_KEY } from "../services/api-service";
 import { SwalError } from "../services/swal-error-handler";
 
-/* HOOK REACT EXAMPLE */
 const Register = (props: RegisterProps) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");

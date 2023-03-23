@@ -1,6 +1,6 @@
-import Swal from "sweetalert2";
+import Swal, { SweetAlertOptions } from "sweetalert2";
 
-export function SwalError(error: any) {
+export function SwalError(error: any, args?: SweetAlertOptions) {
   Swal.fire({
     title: "Error!",
     icon: "error",
@@ -16,10 +16,11 @@ export function SwalError(error: any) {
     hideClass: {
       popup: "animate__animated animate__fadeOutUp",
     },
+    ...args,
   });
 }
 
-export function SwalSuccess(str: string, title: string = "Success!") {
+export function SwalSuccess(str: string, title: string = "Success!", args?: SweetAlertOptions) {
   Swal.fire({
     title,
     icon: "success",
@@ -35,10 +36,11 @@ export function SwalSuccess(str: string, title: string = "Success!") {
     hideClass: {
       popup: "animate__animated animate__fadeOutUp",
     },
+    ...args,
   });
 }
 
-export function SwalWarn(str: string, title: string = "OOPSY!") {
+export function SwalWarn(str: string, title: string = "OOPSY!", args?: SweetAlertOptions) {
   Swal.fire({
     title,
     icon: "error",
@@ -54,6 +56,7 @@ export function SwalWarn(str: string, title: string = "OOPSY!") {
     hideClass: {
       popup: "animate__animated animate__fadeOutUp",
     },
+    ...args,
   });
 }
 

@@ -54,6 +54,8 @@ export async function apiService<T = any>(url: string, method: methods = "GET", 
     }
     if (res.ok) {
       return <T>await res.json();
+    } else {
+      throw new Error("bro this shit is just fucked up");
     }
   } catch (error) {
     console.error("[error in apiService]", error.message);
